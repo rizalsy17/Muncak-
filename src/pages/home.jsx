@@ -1,4 +1,5 @@
 // eslint-disable-next-line no-unused-vars
+//belum responsive
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/muncak.png';
