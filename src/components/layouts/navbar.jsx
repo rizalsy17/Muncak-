@@ -1,13 +1,19 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Mengimpor ikon dari Font Awesome
-import { faMoon, faLanguage } from '@fortawesome/free-solid-svg-icons'; // Mengimpor ikon matahari, bulan, dan bahasa
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoon, faLanguage, faBars, faTimes } from '@fortawesome/free-solid-svg-icons'; // Importing icons including hamburger and close icons
 import logo from '../../assets/muncak.png';
 
 export default function Navbar() {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
     return (
-        <div className="fixed top-0 left-0 w-full shadow-md z-50">
+        <div className="fixed top-0 left-0 w-full shadow-md z-50 bg-white">
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center py-4">
                     <div className="flex items-center">
@@ -16,12 +22,26 @@ export default function Navbar() {
                         </Link>
                     </div>
                     <div className="hidden md:flex space-x-4">
-                        {/* Icon untuk mengatur mode tema */}
-                      <FontAwesomeIcon icon={faMoon} className="text-black cursor-pointer" size="2x" />
-                    {/* Icon untuk mengatur bahasa */}
-                    <FontAwesomeIcon icon={faLanguage} className="text-black cursor-pointer" size="2x" />
+                        {/* Icons for theme and language */}
+                        <FontAwesomeIcon icon={faMoon} className="text-black cursor-pointer" size="2x" />
+                        <FontAwesomeIcon icon={faLanguage} className="text-black cursor-pointer" size="2x" />
+                    </div>
+                    <div className="md:hidden">
+                        <button onClick={toggleMobileMenu} className="text-black focus:outline-none">
+                            <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} size="2x" />
+                        </button>
                     </div>
                 </div>
+                {isMobileMenuOpen && (
+                    <div className="md:hidden">
+                        <div className="flex flex-col space-y-4 py-4">
+                            <Link to="/" className="text-black">Home</Link>
+                            {/* Add more links as needed */}
+                            <FontAwesomeIcon icon={faMoon} className="text-black cursor-pointer" size="2x" />
+                            <FontAwesomeIcon icon={faLanguage} className="text-black cursor-pointer" size="2x" />
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

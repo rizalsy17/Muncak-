@@ -1,8 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Link } from 'react-router-dom';
-import mounImage from '../assets/bro.png';
-import Navbar from '../components/layouts/navbar';
+import mounImage from '../../assets/bro.png';
+import Navbar from '../../components/layouts/navbar';
 
 export default function Login() {
     return (
@@ -11,8 +11,8 @@ export default function Login() {
                 < Navbar/>
                 <div className="flex flex-col md:flex-row justify-center">
                     {/* Gambar */}
-                    <div className="w-full md:w-1/4 md:mr-8 flex mx-auto"> {/* Tambahkan kelas flex justify-center */}
-                        <img className="w-full" src={mounImage} alt="Hero Image"/>
+                    <div className="w-full md:w-2/6 md:mr-8 flex mx-auto"> {/* Tambahkan kelas flex justify-center */}
+                    <img className="w-full mt-52 md:mt-0" src={mounImage} alt="Hero Image"/>
                     </div>
                     {/* Formulir */}
                     <div className="w-full md:w-1/2">

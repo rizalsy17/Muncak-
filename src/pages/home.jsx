@@ -1,5 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 //belum responsive
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/muncak.png';
@@ -56,7 +57,6 @@ const Content = () => {
         
     );
 };
-
 
 const Home = () => {
     return (
