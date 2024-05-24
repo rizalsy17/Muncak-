@@ -41,23 +41,23 @@ const Navbar = () => {
 
 const Content = () => {
   return (
-    <div className="flex justify-center items-center mx-auto h-screen">
+    <div className="flex flex-col md:flex-row justify-center items-center mx-auto h-screen">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col items-center ml-20">
-          <div className="text-left">
+        <div className="flex flex-col items-center md:items-start md:ml-20">
+          <div className="text-center md:text-left">
             <p className="font-poppins font-medium text-xl mb-2">Selamat Datang di Muncak!</p>
             <h1 className="my-2 font-bold leading-tight m-0">Jelajahi Gunung,</h1>
             <h1 className="my-2 font-bold leading-tight m-0">Raih Muncak,</h1>
             <h1 className="my-2 leading-tight m-0">
               <span className="font-bold">Bersama</span> <span className="font-bold border-b-8 border-red-500">MunCak!</span>
             </h1>
-            <button className="btn-rounded btn text-white bg-[#FF3131] w-48 rounded-lg font-normal mt-4 shadow-xl">Klik untuk memulai</button>
+            <button className="btn-rounded btn text-white bg-[#FF3131] w-48 rounded-lg font-normal mt-4 md:mt-24 shadow-xl">Klik untuk memulai</button>
           </div>
         </div>
       </div>
       {/* Right Col */}
-      <div className="hidden md:flex ml-auto">
-        <img className="w-full md:w-3/5" src={mounImage} alt="Hero Image" />
+      <div className="hidden md:flex md:ml-auto w-full md:w-3/5">
+        <img className="w-full" src={mounImage} alt="Hero Image" />
       </div>
     </div>
   );
