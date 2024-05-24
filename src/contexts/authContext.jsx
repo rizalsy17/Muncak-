@@ -1,10 +1,7 @@
-
-// src/context/AuthContext.js
 // eslint-disable-next-line no-unused-vars
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { auth, db } from '../components/auth/firebase';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
+import { register as firebaseRegister, login as firebaseLogin, logout as firebaseLogout, onAuthStateChange } from '../services/firebase/auth';
+import { addUser } from '../services/firebase/firestore';
 
 const authContext = createContext();
 
@@ -14,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChange((user) => {
       setUser(user);
       setLoading(false);
     });
@@ -23,12 +20,12 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (email, password, name) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await firebaseRegister(email, password);
       const user = userCredential.user;
 
       console.log(user);
       if (user) {
-        await setDoc(doc(db, "Users", user.uid), {
+        await addUser(user.uid, {
           email: user.email,
           name: name,
         });
@@ -41,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await firebaseLogin(email, password);
     } catch (error) {
       console.error("Error logging in:", error);
       throw error; // Throw the error to be handled by the calling function
@@ -50,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await signOut(auth);
+      await firebaseLogout();
       setUser(null);
     } catch (error) {
       console.error("Error logging out:", error);
