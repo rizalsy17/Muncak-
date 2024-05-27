@@ -86,7 +86,8 @@ export default function Register() {
                   <div className="form-control justify-between">
                     <button
                       type="submit"
-                      className="btn btn-rounded bg-[#FF432A] w-full text-white">
+                      className="btn btn-rounded bg-[#FF432A] w-full text-white"
+                    >
                       Daftar
                     </button>
                   </div>
@@ -97,7 +98,8 @@ export default function Register() {
                   <span>Sudah punya akun? </span>
                   <Link
                     to="/login"
-                    className="link link-underline-hover text-red-500 text-sm">
+                    className="link link-underline-hover text-red-500 text-sm"
+                  >
                     Masuk Sekarang
                   </Link>
                 </div>

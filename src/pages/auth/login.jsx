@@ -61,7 +61,8 @@ export default function Login() {
                   <div className="form-control justify-between">
                     <button
                       type="submit"
-                      className="btn btn-rounded bg-[#FF432A] w-full text-white">
+                      className="btn btn-rounded bg-[#FF432A] w-full text-white"
+                    >
                       Masuk
                     </button>
                   </div>
@@ -72,7 +73,8 @@ export default function Login() {
                   Belum punya akun?
                   <Link
                     to="/register"
-                    className="link link-underline-hover link text-red-500 text-sm">
+                    className="link link-underline-hover text-red-500 text-sm"
+                  >
                     Daftar Sekarang
                   </Link>
                 </div>

@@ -25,12 +25,14 @@ function Navbar() {
           <div className="flex items-center space-x-4">
             <Link
               to="/login"
-              className="btn-rounded btn text-white bg-black border border-white rounded-lg font-normal">
+              className="btn-rounded btn text-white bg-black border border-white rounded-lg font-normal"
+            >
               Login
             </Link>
             <Link
               to="/register"
-              className="btn-rounded btn btn-black border border-white rounded-lg font-normal">
+              className="btn-rounded btn btn-black border border-white rounded-lg font-normal"
+            >
               Register
             </Link>
           </div>

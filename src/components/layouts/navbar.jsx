@@ -41,7 +41,8 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={toggleMobileMenu}
-              className="text-black focus:outline-none">
+              className="text-black focus:outline-none"
+            >
               <FontAwesomeIcon
                 icon={isMobileMenuOpen ? faTimes : faBars}
                 size="2x"
