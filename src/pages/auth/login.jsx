@@ -55,7 +55,6 @@ export default function Login() {
                     />
                   </div>
                 </div>
-              
                 <div className="form-field pt-5">
                   <div className="form-control justify-between">
                     <button type="submit" className="btn btn-rounded bg-[#FF432A] w-full text-white">Masuk</button>

@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Error registering:", error);
-      throw error; // Throw the error to be handled by the calling function
+      throw error; 
     }
   };
 
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
       await firebaseLogin(email, password);
     } catch (error) {
       console.error("Error logging in:", error);
-      throw error; // Throw the error to be handled by the calling function
+      throw error; 
     }
   };
 

@@ -7,6 +7,7 @@ import Home from '../pages/home';
 import Login from '../pages/auth/login';
 import Register from '../pages/auth/register';
 import HomeUser from '../pages/user/home';
+import AddDummyData from '../test/addDummyData';
 
 const AppRoutes = () => {
     return (
@@ -16,14 +17,8 @@ const AppRoutes = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route 
-            path="/home" 
-            element={
-              <ProtectedRoute>
-                <HomeUser />
-              </ProtectedRoute>
-            } 
-          />
+                    <Route path="/home" element={<ProtectedRoute><HomeUser /></ProtectedRoute>} />
+                    <Route path="/add-dummy-data" element={<AddDummyData />} />
                 </Routes>
             </AuthProvider>
         </Router>
