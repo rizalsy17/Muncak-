@@ -1,5 +1,12 @@
-import { useState, useEffect } from 'react';
-import { addMember, getMembers, updateMember, deleteMember, migrateUsersToMembers } from '../../services/firebase/member/member';
+/* eslint-disable no-param-reassign */
+import { useState, useEffect } from "react";
+import {
+  addMember,
+  getMembers,
+  updateMember,
+  deleteMember,
+  migrateUsersToMembers,
+} from "../../services/firebase/member/member";
 
 const useMember = () => {
   const [members, setMembers] = useState([]);
@@ -56,7 +63,7 @@ const useMember = () => {
     createMember,
     editMember,
     removeMember,
-    migrateUsersToMembers // Adding migrateUsersToMembers function to the hook
+    migrateUsersToMembers,
   };
 };
 

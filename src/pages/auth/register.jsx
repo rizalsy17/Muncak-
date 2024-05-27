@@ -1,10 +1,8 @@
-// eslint-disable-next-line react/no-unescaped-entities
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from '../../components/layouts/navbar';
-import mounImage from '../../assets/bro.png';
-import useRegister from '../../hooks/useRegister';
+import React from "react";
+import { Link } from "react-router-dom";
+import Navbar from "../../components/layouts/navbar";
+import mounImage from "../../assets/bro.png";
+import useRegister from "../../hooks/useRegister";
 
 export default function Register() {
   const {
@@ -29,7 +27,9 @@ export default function Register() {
             <div className="mx-auto flex w-full max-w-sm flex-col gap-6">
               <div className="flex flex-col text-left">
                 <h1 className="text-3xl font-semibold font-poppins">Daftar</h1>
-                <p className="text-sm font-poppins">Daftar dan Siapkan Petualanganmu</p>
+                <p className="text-sm font-poppins">
+                  Daftar dan Siapkan Petualanganmu
+                </p>
                 {error && <p className="text-red-500">{error}</p>}
               </div>
               <form onSubmit={handleSubmit} className="form-group">
@@ -68,7 +68,9 @@ export default function Register() {
                   </div>
                 </div>
                 <div className="form-field">
-                  <label className="form-label font-poppins">Konfirmasi Sandi</label>
+                  <label className="form-label font-poppins">
+                    Konfirmasi Sandi
+                  </label>
                   <div className="form-control">
                     <input
                       placeholder="Ketik disini..."
@@ -79,10 +81,12 @@ export default function Register() {
                     />
                   </div>
                 </div>
-              
+
                 <div className="form-field pt-5">
                   <div className="form-control justify-between">
-                    <button type="submit" className="btn btn-rounded bg-[#FF432A] w-full text-white">
+                    <button
+                      type="submit"
+                      className="btn btn-rounded bg-[#FF432A] w-full text-white">
                       Daftar
                     </button>
                   </div>
@@ -91,7 +95,9 @@ export default function Register() {
               <div className="form-field">
                 <div className="form-control justify-center">
                   <span>Sudah punya akun? </span>
-                  <Link to="/login" className="link link-underline-hover text-red-500 text-sm">
+                  <Link
+                    to="/login"
+                    className="link link-underline-hover text-red-500 text-sm">
                     Masuk Sekarang
                   </Link>
                 </div>

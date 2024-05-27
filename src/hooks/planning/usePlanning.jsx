@@ -1,6 +1,10 @@
-// src/hooks/usePlanning.js
-import { useState, useEffect } from 'react';
-import { addPlanning, getPlannings, updatePlanning, deletePlanning } from '../../services/firebase/planning/planning';
+import { useState, useEffect } from "react";
+import {
+  addPlanning,
+  getPlannings,
+  updatePlanning,
+  deletePlanning,
+} from "../../services/firebase/planning/planning";
 
 const usePlanning = () => {
   const [plannings, setPlannings] = useState([]);
@@ -34,7 +38,9 @@ const usePlanning = () => {
   const editPlanning = async (id, updatedPlanning) => {
     try {
       await updatePlanning(id, updatedPlanning);
-      setPlannings(plannings.map((pl) => (pl.id === id ? updatedPlanning : pl)));
+      setPlannings(
+        plannings.map((pl) => (pl.id === id ? updatedPlanning : pl))
+      );
     } catch (err) {
       setError(err.message);
     }

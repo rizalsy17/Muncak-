@@ -1,6 +1,6 @@
 // src/services/firebase/firestore.js
-import { db } from './config';
-import { setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "./config";
 
 export const addUser = (userId, userData) => {
   const userRef = doc(db, "Users", userId);

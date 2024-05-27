@@ -1,6 +1,10 @@
-// src/hooks/useEquipment.js
-import { useState, useEffect } from 'react';
-import { addEquipment, getEquipments, updateEquipment, deleteEquipment } from '../../services/firebase/equipment/equipment';
+import { useState, useEffect } from "react";
+import {
+  addEquipment,
+  getEquipments,
+  updateEquipment,
+  deleteEquipment,
+} from "../../services/firebase/equipment/equipment";
 
 const useEquipment = () => {
   const [equipments, setEquipments] = useState([]);
@@ -34,7 +38,9 @@ const useEquipment = () => {
   const editEquipment = async (id, updatedEquipment) => {
     try {
       await updateEquipment(id, updatedEquipment);
-      setEquipments(equipments.map((eq) => (eq.id === id ? updatedEquipment : eq)));
+      setEquipments(
+        equipments.map((eq) => (eq.id === id ? updatedEquipment : eq))
+      );
     } catch (err) {
       setError(err.message);
     }

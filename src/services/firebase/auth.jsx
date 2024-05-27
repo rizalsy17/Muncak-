@@ -1,6 +1,11 @@
 // src/services/firebase/auth.js
-import { auth } from './config';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "./config";
 
 export const register = (email, password) => {
   return createUserWithEmailAndPassword(auth, email, password);

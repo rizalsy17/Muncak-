@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
@@ -10,7 +9,7 @@ const firebaseConfig = {
   projectId: "muncak-694ef",
   storageBucket: "muncak-694ef.appspot.com",
   messagingSenderId: "157788384819",
-  appId: "1:157788384819:web:fdfda7ca10fa2ad0f5fd46"
+  appId: "1:157788384819:web:fdfda7ca10fa2ad0f5fd46",
 };
 
 // Initialize Firebase

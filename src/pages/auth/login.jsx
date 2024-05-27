@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { Link } from "react-router-dom";
 import mounImage from "../../assets/bro.png";
@@ -57,7 +56,6 @@ export default function Login() {
                     />
                   </div>
                 </div>
-
 
                 <div className="form-field pt-5">
                   <div className="form-control justify-between">
