@@ -4,36 +4,33 @@ import mounImage from "../../assets/bro.png";
 
 export default function ContentLanding() {
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center mt-10 mx-auto h-screen">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
-        {/* Left Col */}
-        <div className="flex flex-col items-center md:items-start">
-          <div className="text-center text-darkText md:text-left ml-20">
-            <p className="font-medium text-xl mb-2">Welcome to MunCak!</p>
-            <h1 className="my-2 font-semibold leading-tight m-0">
-              Explore Mountains,
+    <div className="flex flex-col-reverse md:flex-row justify-center items-center mx-auto min-h-screen">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col items-center md:items-start md:ml-20">
+          <div className="text-center md:text-left">
+            <p className="font-poppins font-medium text-xl mb-2 text-darkText">
+              Selamat Datang di Muncak!
+            </p>
+            <h1 className="my-2 font-bold leading-tight m-0 text-darkText">
+              Jelajahi Gunung,
             </h1>
-            <h1 className="my-2 font-semibold leading-tight m-0">
-              Reach the Peak,
+            <h1 className="my-2 font-bold leading-tight m-0 text-darkText">
+              Raih Muncak,
             </h1>
-            <h1 className="my-2 leading-tight m-0">
-              <span className="font-semibold">With</span>{" "}
-              <span className="font-semibold border-b-8 border-primary">
+            <h1 className="my-2 leading-tight m-0 text-darkText">
+              <span className="font-bold">Bersama</span>{" "}
+              <span className="font-bold border-b-8 border-red-500">
                 MunCak!
               </span>
             </h1>
-            <Link
-              to="/login"
-              className="btn-rounded btn text-white text-base font-light bg-primary w-48 rounded-lg mt-4 md:mt-8 shadow-xl"
-            >
-              Click to start
-            </Link>
+            <button className="btn-rounded btn text-white bg-[#FF4343] w-48 rounded-lg font-normal mt-10 md:mt-4 shadow-xl">
+              Klik untuk memulai
+            </button>
           </div>
         </div>
-        {/* Right Col */}
-        <div className="hidden md:flex w-full md:w-2/5 justify-end mt-8 md:mt-0">
-          <img className="w-90" src={mounImage} alt="Hero Image" />
-        </div>
+      </div>
+      <div className="w-full md:w-3/5 mb-4 md:mb-0 max-w-xs md:max-w-full mx-auto md:mx-0 md:mr-24">
+        <img className="w-full" src={mounImage} alt="Hero Image" />
       </div>
     </div>
   );
