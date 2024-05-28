@@ -5,14 +5,6 @@ export default function Navbar() {
     <div className="flex justify-center items-center h-screen">
       <div className="absolute right-0 xl:w-96 xl:right-80 md:mr-60 md:top-10">
         <div className="relative mb-4 flex w-full flex-wrap items-stretch">
-          <input
-            type="search"
-            className="relative m-0 block flex-auto rounded-lg border border-solid border-neutral-300 bg-gray-200 bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:bg-white focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary dark:focus:bg-gray-700"
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="button-addon2"
-          />
-
           {/* <!--Search icon--> */}
           <span
             className="input-group-text flex items-center whitespace-nowrap rounded px-3 py-1.5 text-center text-base font-normal text-neutral-700 dark:text-neutral-200"
