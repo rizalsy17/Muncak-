@@ -2,11 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "../contexts/authContext";
 import ProtectedRoute from "./protectedRoute";
-import Landing from "../pages/landing";
+import Landing from "../pages/Landing";
 import Login from "../pages/auth/login";
 import Register from "../pages/auth/register";
 import HomeUser from "../pages/user/home";
 import AddDummyData from "../test/addDummyData";
+import NotFoundPage from "../pages/NotFoundPage";
 
 function AppRoutes() {
   return (
@@ -25,6 +26,7 @@ function AppRoutes() {
             }
           />
           <Route path="/add-dummy-data" element={<AddDummyData />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AuthProvider>
     </Router>

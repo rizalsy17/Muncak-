@@ -7,9 +7,9 @@ import {
   faBars,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import logo from "../../assets/muncak.png";
+import logo from "../../assets/muncak-logo.svg";
 
-export default function Navbar() {
+export default function NavbarAuth() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -17,7 +17,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full shadow-md z-50 bg-white">
+    <div className="fixed top-0 left-0 w-full shadow-md z-50 bg-background">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
@@ -28,13 +28,8 @@ export default function Navbar() {
           <div className="hidden md:flex space-x-4">
             {/* Icons for theme and language */}
             <FontAwesomeIcon
-              icon={faMoon}
-              className="text-black cursor-pointer"
-              size="2x"
-            />
-            <FontAwesomeIcon
               icon={faLanguage}
-              className="text-black cursor-pointer"
+              className="text-darkText cursor-pointer"
               size="2x"
             />
           </div>
