@@ -108,7 +108,7 @@ export default function Register() {
               </div>
             </div>
           </div>
-          <div className="w-full md:w-2/6 md:ml-8 flex justify-center">
+          <div className="w-full md:w-2/6 md:ml-8 flex justify-center hidden md:flex">
             <img
               className="w-full mt-12 md:mt-0"
               src={mounImage}

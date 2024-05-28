@@ -13,7 +13,7 @@ export default function Login() {
       <div className="container mx-auto px-4">
         <Navbar />
         <div className="flex flex-col md:flex-row justify-center">
-          <div className="w-full md:w-2/6 md:mr-8 flex mx-auto">
+          <div className="hidden md:flex w-full md:w-2/6 md:mr-8 mx-auto">
             <img
               className="w-full mt-52 md:mt-0"
               src={mounImage}
@@ -68,7 +68,7 @@ export default function Login() {
               </form>
               <div className="form-field">
                 <div className="form-control justify-center text-darkText font-light">
-                  Dont have an account?
+                  Don't have an account?
                   <Link
                     to="/register"
                     className="link link-underline-hover text-primary font-light text-sm"
