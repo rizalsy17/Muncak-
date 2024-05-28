@@ -68,7 +68,7 @@ export default function Login() {
               </form>
               <div className="form-field">
                 <div className="form-control justify-center text-darkText font-light">
-                  Don't have an account?
+                  Don&apos;t have an account?
                   <Link
                     to="/register"
                     className="link link-underline-hover text-primary font-light text-sm"
