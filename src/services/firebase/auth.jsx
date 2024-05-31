@@ -22,3 +22,7 @@ export const logout = () => {
 export const onAuthStateChange = (callback) => {
   return onAuthStateChanged(auth, callback);
 };
+
+export const getUserName = (user) => {
+  return user.displayName || user.email.split("@")[0];
+};

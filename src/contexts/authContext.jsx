@@ -5,6 +5,7 @@ import {
   login as firebaseLogin,
   logout as firebaseLogout,
   onAuthStateChange,
+  getUserName,
 } from "../services/firebase/auth";
 import { addUser } from "../services/firebase/firestore";
 
@@ -12,11 +13,17 @@ const authContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChange((user) => {
       setUser(user);
+      if (user) {
+        setUserName(getUserName(user));
+      } else {
+        setUserName("");
+      }
       setLoading(false);
     });
     return () => unsubscribe();
@@ -59,7 +66,9 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <authContext.Provider value={{ user, register, login, logout, loading }}>
+    <authContext.Provider
+      value={{ user, userName, register, login, logout, loading }}
+    >
       {children}
     </authContext.Provider>
   );

@@ -9,6 +9,7 @@ import HomeUser from "../pages/user/home";
 import MyPlan from "../pages/user/MyPlan";
 import AddDummyData from "../test/addDummyData";
 import NotFoundPage from "../pages/NotFoundPage";
+import HomePage from "../pages/HomePage";
 
 function AppRoutes() {
   return (
@@ -22,7 +23,7 @@ function AppRoutes() {
             path="/home"
             element={
               <ProtectedRoute>
-                <HomeUser />
+                <HomePage />
               </ProtectedRoute>
             }
           />
