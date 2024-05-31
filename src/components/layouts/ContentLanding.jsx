@@ -23,9 +23,12 @@ export default function ContentLanding() {
                 MunCak!
               </span>
             </h1>
-            <button className="btn-rounded btn text-white bg-[#FF4343] w-48 rounded-lg font-normal mt-10 md:mt-4 shadow-xl">
+            <Link
+              to="/login"
+              className="btn-rounded btn text-white bg-[#FF4343] w-48 rounded-lg font-normal mt-10 md:mt-4 shadow-xl"
+            >
               Klik untuk memulai
-            </button>
+            </Link>
           </div>
         </div>
       </div>

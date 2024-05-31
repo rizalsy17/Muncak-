@@ -5,9 +5,9 @@ import ProtectedRoute from "./protectedRoute";
 import Landing from "../pages/landing";
 import Login from "../pages/auth/login";
 import Register from "../pages/auth/register";
-import HomeUser from "../pages/user/home";
 import AddDummyData from "../test/addDummyData";
 import NotFoundPage from "../pages/NotFoundPage";
+import HomePage from "../pages/HomePage";
 
 function AppRoutes() {
   return (
@@ -21,7 +21,7 @@ function AppRoutes() {
             path="/home"
             element={
               <ProtectedRoute>
-                <HomeUser />
+                <HomePage />
               </ProtectedRoute>
             }
           />
