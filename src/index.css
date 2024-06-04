@@ -20,6 +20,10 @@ h1 {
   line-height: 1.1;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #232323;

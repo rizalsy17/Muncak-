@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { LuPlusCircle } from "react-icons/lu";
 import CardPlan from "./CardPlan";
+import CreatePlan from "../../modal/CreatePlan";
 
 export default function PlanningList() {
   const plans = [
@@ -12,6 +13,7 @@ export default function PlanningList() {
   ];
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredPlans, setFilteredPlans] = useState(plans);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSearch = (event) => {
     const query = event.target.value.toLowerCase();
@@ -23,11 +25,22 @@ export default function PlanningList() {
     setFilteredPlans(filtered);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="mt-10 w-4/5 mx-auto">
       <div className="flex items-center mt-10 mb-4">
         <h2 className="text-xl font-semibold text-darkText">Planning List</h2>
-        <LuPlusCircle className="text-2xl text-darkText cursor-pointer ml-4" />
+        <LuPlusCircle
+          onClick={openModal}
+          className="text-2xl text-darkText cursor-pointer ml-4"
+        />
         <div className="ml-auto w-1/4">
           <input
             type="text"
@@ -45,6 +58,7 @@ export default function PlanningList() {
           </div>
         ))}
       </div>
+      {isModalOpen && <CreatePlan closeModal={closeModal} />}
     </div>
   );
 }

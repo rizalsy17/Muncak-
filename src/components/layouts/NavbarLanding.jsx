@@ -13,19 +13,19 @@ export default function NavbarLanding() {
           <div className="hidden md:flex space-x-8">
             <a
               className="text-lightText hover:text-darkText font-light"
-              href="#"
+              href="#home"
             >
               Home
             </a>
             <a
               className="text-lightText hover:text-darkText font-light"
-              href="#"
+              href="#about"
             >
               About
             </a>
             <a
               className="text-lightText hover:text-darkText font-light"
-              href="#"
+              href="#contact"
             >
               Contact
             </a>

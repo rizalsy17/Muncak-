@@ -2,7 +2,7 @@ import React from "react";
 
 export default function About() {
   return (
-    <div className="container mt-10 mx-auto min-h-screen px-4 sm font-light:px-6 lg:px-8">
+    <div className="container mt-20 mx-auto min-h-screen px-4 sm font-light:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-darkText">
         <div className="flex justify-center items-center">
           <p className="text-4xl font-semibold">
