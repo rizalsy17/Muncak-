@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Navbar from "../../components/layouts/user/navbar";
+import NavbarHome from "../../components/layouts/HomePage/NavbarHome";
 
 export default function MyPlan() {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen mt-20 p-4 md:mt-24">
-      <Navbar />
+      <NavbarHome />
       <div className="w-full max-w-6xl">
         <div className="top-0 bg-white z-10 p-4 mb-4">
           <div className="text-left mb-4">
@@ -15,7 +15,9 @@ export default function MyPlan() {
             </p>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-            <h2 className="md:text-2xl text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis mb-2 md:mb-0">Planning List</h2>
+            <h2 className="md:text-2xl text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis mb-2 md:mb-0">
+              Planning List
+            </h2>
             <input
               type="text"
               placeholder="Search"
@@ -26,7 +28,7 @@ export default function MyPlan() {
           </div>
         </div>
         <div className="flex md:hidden overflow-x-auto space-x-4 mt-4">
-        <div className="card card-image-cover w-64 h-72 flex-shrink-0 relative">
+          <div className="card card-image-cover w-64 h-72 flex-shrink-0 relative">
             <img
               src="https://source.unsplash.com/random/300x200?sig=1"
               alt=""
@@ -38,7 +40,9 @@ export default function MyPlan() {
               </p>
             </div>
             <div className="absolute bottom-2 right-2">
-              <button className="btn-secondary btn text-xs p-1">Learn More</button>
+              <button className="btn-secondary btn text-xs p-1">
+                Learn More
+              </button>
             </div>
           </div>
           <div className="card card-image-cover w-64 h-72 flex-shrink-0 relative">
@@ -53,7 +57,9 @@ export default function MyPlan() {
               </p>
             </div>
             <div className="absolute bottom-2 right-2">
-              <button className="btn-secondary btn text-xs p-1">Learn More</button>
+              <button className="btn-secondary btn text-xs p-1">
+                Learn More
+              </button>
             </div>
           </div>
           <div className="card card-image-cover w-64 h-72 flex-shrink-0 relative">
@@ -68,7 +74,9 @@ export default function MyPlan() {
               </p>
             </div>
             <div className="absolute bottom-2 right-2">
-              <button className="btn-secondary btn text-xs p-1">Learn More</button>
+              <button className="btn-secondary btn text-xs p-1">
+                Learn More
+              </button>
             </div>
           </div>
           <div className="card card-image-cover w-64 h-72 flex-shrink-0 relative">
@@ -83,7 +91,9 @@ export default function MyPlan() {
               </p>
             </div>
             <div className="absolute bottom-2 right-2">
-              <button className="btn-secondary btn text-xs p-1">Learn More</button>
+              <button className="btn-secondary btn text-xs p-1">
+                Learn More
+              </button>
             </div>
           </div>
           <div className="card card-image-cover w-64 h-72 flex-shrink-0 relative">
@@ -98,7 +108,9 @@ export default function MyPlan() {
               </p>
             </div>
             <div className="absolute bottom-2 right-2">
-              <button className="btn-secondary btn text-xs p-1">Learn More</button>
+              <button className="btn-secondary btn text-xs p-1">
+                Learn More
+              </button>
             </div>
           </div>
         </div>
@@ -115,7 +127,9 @@ export default function MyPlan() {
               </p>
             </div>
             <div className="card-footer mt-4 absolute bottom-0 right-0">
-              <button className="btn-secondary btn text-xs md:text-base p-1 md:p-2">Learn More</button>
+              <button className="btn-secondary btn text-xs md:text-base p-1 md:p-2">
+                Learn More
+              </button>
             </div>
           </div>
           <div className="card card-image-cover w-full h-72 relative">
@@ -130,7 +144,9 @@ export default function MyPlan() {
               </p>
             </div>
             <div className="card-footer mt-4 absolute bottom-0 right-0">
-              <button className="btn-secondary btn text-xs md:text-base p-1 md:p-2">Learn More</button>
+              <button className="btn-secondary btn text-xs md:text-base p-1 md:p-2">
+                Learn More
+              </button>
             </div>
           </div>
           <div className="card card-image-cover w-full h-72 relative">
@@ -145,7 +161,9 @@ export default function MyPlan() {
               </p>
             </div>
             <div className="card-footer mt-4 absolute bottom-0 right-0">
-              <button className="btn-secondary btn text-xs md:text-base p-1 md:p-2">Learn More</button>
+              <button className="btn-secondary btn text-xs md:text-base p-1 md:p-2">
+                Learn More
+              </button>
             </div>
           </div>
           <div className="card card-image-cover w-full h-72 relative">
@@ -160,7 +178,9 @@ export default function MyPlan() {
               </p>
             </div>
             <div className="card-footer mt-4 absolute bottom-0 right-0">
-              <button className="btn-secondary btn text-xs md:text-base p-1 md:p-2">Learn More</button>
+              <button className="btn-secondary btn text-xs md:text-base p-1 md:p-2">
+                Learn More
+              </button>
             </div>
           </div>
           <div className="card card-image-cover w-full h-72 relative">
@@ -175,7 +195,9 @@ export default function MyPlan() {
               </p>
             </div>
             <div className="card-footer mt-4 absolute bottom-0 right-0">
-              <button className="btn-secondary btn text-xs md:text-base p-1 md:p-2">Learn More</button>
+              <button className="btn-secondary btn text-xs md:text-base p-1 md:p-2">
+                Learn More
+              </button>
             </div>
           </div>
         </div>

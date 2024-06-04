@@ -5,7 +5,6 @@ import ProtectedRoute from "./protectedRoute";
 import Landing from "../pages/landing";
 import Login from "../pages/auth/login";
 import Register from "../pages/auth/register";
-import HomeUser from "../pages/user/home";
 import MyPlan from "../pages/user/MyPlan";
 import AddDummyData from "../test/addDummyData";
 import NotFoundPage from "../pages/NotFoundPage";
@@ -27,14 +26,14 @@ function AppRoutes() {
               </ProtectedRoute>
             }
           />
-          {/* <Route
+          <Route
             path="/my_plan"
             element={
               <ProtectedRoute>
                 <MyPlan />
               </ProtectedRoute>
             }
-          /> */}
+          />
           <Route path="/myplan" element={<MyPlan />} />
           <Route path="/add-dummy-data" element={<AddDummyData />} />
           <Route path="*" element={<NotFoundPage />} />

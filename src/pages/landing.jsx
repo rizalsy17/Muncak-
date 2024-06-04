@@ -7,8 +7,12 @@ export default function Landing() {
   return (
     <div>
       <NavbarLanding />
-      <ContentLanding />
-      <About />
+      <div id="home">
+        <ContentLanding />
+      </div>
+      <div id="about">
+        <About />
+      </div>
     </div>
   );
 }

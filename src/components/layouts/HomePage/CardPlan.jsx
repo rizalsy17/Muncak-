@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { fetchRandomImage } from "../../../services/unsplash";
+import DetailUser from "../../modal/DetailUser";
 
 export default function CardPlan({ title, date }) {
   const [image, setImage] = useState("");
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
   useEffect(() => {
     const getImage = async () => {
@@ -22,6 +24,14 @@ export default function CardPlan({ title, date }) {
     getImage();
   }, [title]);
 
+  const openDetailModal = () => {
+    setIsDetailModalOpen(true);
+  };
+
+  const closeDetailModal = () => {
+    setIsDetailModalOpen(false);
+  };
+
   return (
     <div className="bg-white shadow-sm shadow-lightText rounded-lg">
       <img
@@ -35,11 +45,15 @@ export default function CardPlan({ title, date }) {
             <h3 className="text-base font-medium text-darkText">{title}</h3>
             <p className="text-lightText">{date}</p>
           </div>
-          <button className="bg-primary text-white py-1  rounded-full w-1/3">
+          <button
+            onClick={openDetailModal}
+            className="bg-primary text-white py-1  rounded-full w-1/3"
+          >
             Detail
           </button>
         </div>
       </div>
+      {isDetailModalOpen && <DetailUser closeModal={closeDetailModal} />}
     </div>
   );
 }

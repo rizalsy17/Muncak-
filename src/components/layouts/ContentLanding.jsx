@@ -9,16 +9,16 @@ export default function ContentLanding() {
         <div className="flex flex-col items-center md:items-start md:ml-20">
           <div className="text-center md:text-left">
             <p className="font-poppins font-medium text-xl mb-2 text-darkText">
-              Selamat Datang di Muncak!
+              Welcome to Muncak!
             </p>
             <h1 className="my-2 font-bold leading-tight m-0 text-darkText">
-              Jelajahi Gunung,
+              Explore Mountains,
             </h1>
             <h1 className="my-2 font-bold leading-tight m-0 text-darkText">
-              Raih Muncak,
+              Reach the Peaks,
             </h1>
             <h1 className="my-2 leading-tight m-0 text-darkText">
-              <span className="font-bold">Bersama</span>{" "}
+              <span className="font-bold">With</span>{" "}
               <span className="font-bold border-b-8 border-red-500">
                 MunCak!
               </span>
@@ -27,7 +27,7 @@ export default function ContentLanding() {
               to="/login"
               className="btn-rounded btn text-white bg-[#FF4343] w-48 rounded-lg font-normal mt-10 md:mt-4 shadow-xl"
             >
-              Klik untuk memulai
+              Click to get started
             </Link>
           </div>
         </div>
