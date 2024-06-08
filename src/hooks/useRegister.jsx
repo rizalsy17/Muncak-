@@ -14,9 +14,14 @@ const useRegister = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      setError("Password minimal 6 karakter");
+      setError("Password dan konfirmasi password tidak cocok.");
       return;
     }
+    if (password.length < 6) {
+      setError("Password minimal 6 karakter.");
+      return;
+    }
+    setError(""); // Reset error sebelum mencoba registrasi
     try {
       await register(email, password, name);
       navigate("/login");

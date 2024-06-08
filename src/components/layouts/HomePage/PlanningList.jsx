@@ -1,19 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { LuPlusCircle } from "react-icons/lu";
 import CardPlan from "./CardPlan";
 import CreatePlan from "../../modal/CreatePlan";
+import { collection, getDocs, addDoc, onSnapshot } from "firebase/firestore";
+import { db } from "../../../services/firebase/config";
 
 export default function PlanningList() {
-  const plans = [
-    { title: "Gunung Rinjani", date: "24 Mei 2024" },
-    { title: "Gunung Gede", date: "24 Mei 2024" },
-    { title: "Gunung Merbabu", date: "24 Mei 2024" },
-    { title: "Gunung Batu", date: "24 Mei 2024" },
-    { title: "Gunung Batu", date: "24 Mei 2024" },
-  ];
+  const [plans, setPlans] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredPlans, setFilteredPlans] = useState(plans);
+  const [filteredPlans, setFilteredPlans] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const fetchPlans = async () => {
+      try {
+        const plansCollection = collection(db, "Planning");
+        const plansSnapshot = await getDocs(plansCollection);
+        const plansData = plansSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setPlans(plansData);
+        setFilteredPlans(plansData);
+      } catch (error) {
+        console.error("Error fetching plans:", error);
+      }
+    };
+
+    const unsubscribe = onSnapshot(collection(db, "Planning"), (snapshot) => {
+      const planningData = [];
+      snapshot.forEach((doc) => {
+        planningData.push({ id: doc.id, ...doc.data() });
+      });
+      setPlans(planningData);
+      setFilteredPlans(planningData);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleSearch = (event) => {
     const query = event.target.value.toLowerCase();
@@ -23,6 +47,17 @@ export default function PlanningList() {
       plan.title.toLowerCase().includes(query)
     );
     setFilteredPlans(filtered);
+  };
+
+  const addPlan = async (newPlan) => {
+    try {
+      const docRef = await addDoc(collection(db, "Planning"), newPlan);
+      const addedPlan = { id: docRef.id, ...newPlan };
+      setPlans([...plans, addedPlan]);
+      setFilteredPlans([...filteredPlans, addedPlan]);
+    } catch (error) {
+      console.error("Error adding plan:", error);
+    }
   };
 
   const openModal = () => {
@@ -52,13 +87,13 @@ export default function PlanningList() {
         </div>
       </div>
       <div className="flex flex-wrap -mx-2">
-        {filteredPlans.map((plan, index) => (
-          <div className="px-2 w-full md:w-1/3 lg:w-1/3 mb-4" key={index}>
-            <CardPlan title={plan.title} date={plan.date} />
+        {filteredPlans.map((plan) => (
+          <div className="px-2 w-full md:w-1/3 lg:w-1/3 mb-4" key={plan.id}>
+            <CardPlan title={plan.tripName} date={plan.startDate.toDate().toLocaleDateString()} />
           </div>
         ))}
       </div>
-      {isModalOpen && <CreatePlan closeModal={closeModal} />}
+      {isModalOpen && <CreatePlan closeModal={closeModal} addPlan={addPlan} />}
     </div>
   );
 }

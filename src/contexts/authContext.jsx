@@ -40,6 +40,8 @@ export function AuthProvider({ children }) {
           email: user.email,
           name,
         });
+        // await user.updateProfile({ displayName: name });
+        setUserName(name);
       }
     } catch (error) {
       console.error("Error registering:", error);
