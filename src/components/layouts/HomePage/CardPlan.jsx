@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { FaUserPlus, FaTools, FaInfoCircle } from "react-icons/fa"; // Import icon
+import React, { useState } from "react";
+import { FaUserPlus, FaTools, FaInfoCircle, FaSignInAlt } from "react-icons/fa"; // Import icon
+import { useLocation } from "react-router-dom"; // Import useLocation
 import DetailUser from "../../modal/DetailUser";
+// import AddMemberModal from "../../modal/AddMemberModal"; // Import AddMemberModal
+// import AddEquipmentModal from "../../modal/AddEquipmentModal"; // Import AddEquipmentModal
 
 export default function CardPlan({ title, date, imageUrl }) {
+  const location = useLocation(); // Get current location
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const [isMemberModalOpen, setIsMemberModalOpen] = useState(false);
+  const [isEquipmentModalOpen, setIsEquipmentModalOpen] = useState(false);
 
   const openDetailModal = () => {
     setIsDetailModalOpen(true);
@@ -11,6 +17,22 @@ export default function CardPlan({ title, date, imageUrl }) {
 
   const closeDetailModal = () => {
     setIsDetailModalOpen(false);
+  };
+
+  const openMemberModal = () => {
+    setIsMemberModalOpen(true);
+  };
+
+  const closeMemberModal = () => {
+    setIsMemberModalOpen(false);
+  };
+
+  const openEquipmentModal = () => {
+    setIsEquipmentModalOpen(true);
+  };
+
+  const closeEquipmentModal = () => {
+    setIsEquipmentModalOpen(false);
   };
 
   return (
@@ -27,28 +49,42 @@ export default function CardPlan({ title, date, imageUrl }) {
             <p className="text-lightText">{date}</p>
           </div>
           <div className="flex space-x-2">
+            {location.pathname === "/my_plan" && (
+              <>
+                <button
+                  onClick={openMemberModal}
+                  className="bg-primary text-white py-1 px-2 rounded-full"
+                >
+                  <FaUserPlus />
+                </button>
+                <button
+                  onClick={openEquipmentModal}
+                  className="bg-primary text-white py-1 px-2 rounded-full"
+                >
+                  <FaTools />
+                </button>
+              </>
+            )}
+            {location.pathname === "/home" && (
+              <button
+                onClick={openDetailModal}
+                className="bg-primary text-white py-1 px-2 rounded-full"
+              >
+                <FaSignInAlt />
+              </button>
+            )}
             <button
               onClick={openDetailModal}
               className="bg-primary text-white py-1 px-2 rounded-full"
             >
-              <FaUserPlus />
-            </button>
-            <button
-              onClick={openDetailModal}
-              className="bg-primary text-white py-1 px-2 rounded-full"
-            >
-              <FaTools />
-            </button>
-            <button
-              onClick={openDetailModal}
-              className="bg-primary text-white py-1 px-2 rounded-full"
-            >
-              <FaInfoCircle  />
+              <FaInfoCircle />
             </button>
           </div>
         </div>
       </div>
       {isDetailModalOpen && <DetailUser closeModal={closeDetailModal} />}
+      {/* {isMemberModalOpen && <AddMemberModal closeModal={closeMemberModal} />}
+      {isEquipmentModalOpen && <AddEquipmentModal closeModal={closeEquipmentModal} />} */}
     </div>
   );
 }
