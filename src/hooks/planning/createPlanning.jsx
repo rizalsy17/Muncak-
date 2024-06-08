@@ -30,8 +30,8 @@ const createPlanning = () => {
 
       const docRef = await addDoc(collection(db, "Planning"), {
         tripName,
-        startDate: startTimestamp, // Save as Timestamp
-        endDate: endTimestamp, // Save as Timestamp
+        startDate: startTimestamp, 
+        endDate: endTimestamp, 
         imageUrl,
         mountain,
         participants,
