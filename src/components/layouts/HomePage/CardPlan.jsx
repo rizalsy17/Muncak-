@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { FaUserPlus, FaTools, FaInfoCircle } from "react-icons/fa"; // Import icon
 import DetailUser from "../../modal/DetailUser";
 
 export default function CardPlan({ title, date, imageUrl }) {
@@ -25,12 +26,26 @@ export default function CardPlan({ title, date, imageUrl }) {
             <h3 className="text-base font-medium text-darkText">{title}</h3>
             <p className="text-lightText">{date}</p>
           </div>
-          <button
-            onClick={openDetailModal}
-            className="bg-primary text-white py-1  rounded-full w-1/3"
-          >
-            Detail
-          </button>
+          <div className="flex space-x-2">
+            <button
+              onClick={openDetailModal}
+              className="bg-primary text-white py-1 px-2 rounded-full"
+            >
+              <FaUserPlus />
+            </button>
+            <button
+              onClick={openDetailModal}
+              className="bg-primary text-white py-1 px-2 rounded-full"
+            >
+              <FaTools />
+            </button>
+            <button
+              onClick={openDetailModal}
+              className="bg-primary text-white py-1 px-2 rounded-full"
+            >
+              <FaInfoCircle  />
+            </button>
+          </div>
         </div>
       </div>
       {isDetailModalOpen && <DetailUser closeModal={closeDetailModal} />}
