@@ -1,9 +1,17 @@
-import { useState, useEffect } from 'react';
-import { db } from '../../services/firebase/config';
-import { doc, getDoc, addDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { useState, useEffect } from "react";
+import { db } from "../../services/firebase/config";
+import {
+  doc,
+  getDoc,
+  addDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
 
 const useAddMemberPlan = (planningId) => {
-  const [selectedUser, setSelectedUser] = useState('');
+  const [selectedUser, setSelectedUser] = useState("");
   const [error, setError] = useState(null);
   const [selectedPlanning, setSelectedPlanning] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -39,7 +47,9 @@ const useAddMemberPlan = (planningId) => {
         collection(db, "Members"),
         where("planningId", "==", planningId)
       );
-      const currentParticipantsSnapshot = await getDocs(currentParticipantsQuery);
+      const currentParticipantsSnapshot = await getDocs(
+        currentParticipantsQuery
+      );
       const currentParticipantsCount = currentParticipantsSnapshot.size;
 
       // Pengecekan apakah jumlah peserta sudah mencapai batas maksimum
@@ -69,9 +79,9 @@ const useAddMemberPlan = (planningId) => {
       });
 
       setLoading(false);
-      setSelectedUser('');
+      setSelectedUser("");
       setError(null);
-      setSuccess(true); 
+      setSuccess(true);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -114,7 +124,7 @@ const useAddMemberPlan = (planningId) => {
     error,
     selectedPlanning,
     loading,
-    success, 
+    success,
   };
 };
 

@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { db } from "../../services/firebase/config";
-import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  getDoc,
+} from "firebase/firestore";
 
 const usePlanMembersWithNames = (planningId) => {
   const [planMembersWithNames, setPlanMembersWithNames] = useState([]);
@@ -26,9 +33,12 @@ const usePlanMembersWithNames = (planningId) => {
   }, [planningId]);
 
   const fetchPlanMembers = async (planningId) => {
-    const membersQuery = query(collection(db, "Members"), where("planningId", "==", planningId));
+    const membersQuery = query(
+      collection(db, "Members"),
+      where("planningId", "==", planningId)
+    );
     const membersSnapshot = await getDocs(membersQuery);
-    return membersSnapshot.docs.map(doc => doc.data());
+    return membersSnapshot.docs.map((doc) => doc.data());
   };
 
   const fetchMembersWithNames = async (members) => {

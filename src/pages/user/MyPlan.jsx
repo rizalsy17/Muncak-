@@ -9,7 +9,8 @@ export default function MyPlan() {
   const { filteredPlans, searchTerm, handleSearch, userName } = useMyPlan();
   const [selectedPlanningId, setSelectedPlanningId] = useState(null); // State untuk menyimpan id planning yang dipilih
   const [isEditGearModalOpen, setIsEditGearModalOpen] = useState(false); // State untuk melacak apakah modal EditGear terbuka
-  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] = useState(false); // State untuk melacak apakah modal EditParticipants terbuka
+  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] =
+    useState(false); // State untuk melacak apakah modal EditParticipants terbuka
 
   const handleCardPlanClick = (planningId) => {
     setSelectedPlanningId(planningId);
@@ -70,14 +71,18 @@ export default function MyPlan() {
           ))}
         </div>
       </div>
-      {selectedPlanningId && isEditParticipantsModalOpen && ( // Tampilkan modal EditParticipants jika selectedPlanningId ada dan isEditParticipantsModalOpen true
-        <EditParticipants
-          closeModal={closeEditParticipantsModal}
-          planningId={selectedPlanningId} // Teruskan selectedPlanningId ke modal
-        />
-      )}
+      {selectedPlanningId &&
+        isEditParticipantsModalOpen && ( // Tampilkan modal EditParticipants jika selectedPlanningId ada dan isEditParticipantsModalOpen true
+          <EditParticipants
+            closeModal={closeEditParticipantsModal}
+            planningId={selectedPlanningId} // Teruskan selectedPlanningId ke modal
+          />
+        )}
       {isEditGearModalOpen && ( // Tampilkan modal EditGear jika isEditGearModalOpen true
-        <EditGear closeModal={closeEditGearModal} planningId={selectedPlanningId} />
+        <EditGear
+          closeModal={closeEditGearModal}
+          planningId={selectedPlanningId}
+        />
       )}
     </div>
   );

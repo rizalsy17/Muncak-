@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "ripple-ui/dist/index.css";
 
 :root {
   font-family: Poppins;

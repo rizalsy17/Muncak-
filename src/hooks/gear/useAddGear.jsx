@@ -9,8 +9,8 @@ const useAddGear = (closeModal, planningId) => {
   const [selectedMember, setSelectedMember] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [planMembers, setPlanMembers] = useState([]); 
-  const [showSuccessModal, setShowSuccessModal] = useState(false); 
+  const [planMembers, setPlanMembers] = useState([]);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleAddGear = async () => {
     try {
@@ -24,7 +24,7 @@ const useAddGear = (closeModal, planningId) => {
         gearName,
         amount: parseInt(amount),
         budget: parseInt(budget),
-        responsibleMember: selectedMember
+        responsibleMember: selectedMember,
       });
 
       console.log("Gear added successfully");
@@ -40,9 +40,15 @@ const useAddGear = (closeModal, planningId) => {
       if (planningId) {
         setLoading(true);
         try {
-          const membersQuery = query(collection(db, "Members"), where("planningId", "==", planningId));
+          const membersQuery = query(
+            collection(db, "Members"),
+            where("planningId", "==", planningId)
+          );
           const membersSnapshot = await getDocs(membersQuery);
-          const membersList = membersSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+          const membersList = membersSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }));
           setPlanMembers(membersList);
           setLoading(false);
         } catch (error) {
@@ -69,8 +75,8 @@ const useAddGear = (closeModal, planningId) => {
     error,
     loading,
     planMembers,
-    showSuccessModal, 
-    setShowSuccessModal 
+    showSuccessModal,
+    setShowSuccessModal,
   };
 };
 

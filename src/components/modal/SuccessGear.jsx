@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const SuccessGear = ({ onClose }) => {
+function SuccessGear({ onClose }) {
   return (
     <div className="fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50 flex">
       <div className="relative w-auto max-w-md m-auto mt-12">
@@ -20,14 +20,15 @@ const SuccessGear = ({ onClose }) => {
             </svg>
           </div>
           <div className="text-center mt-4">
-            <h3 className="text-lg font-semibold text-gray-800">Gear Added Successfully!</h3>
-            <p className="text-sm text-gray-600 mt-2">You have successfully added gear to the planning.</p>
+            <h3 className="text-lg font-semibold text-gray-800">
+              Gear Added Successfully!
+            </h3>
+            <p className="text-sm text-gray-600 mt-2">
+              You have successfully added gear to the planning.
+            </p>
           </div>
           <div className="mt-6 flex justify-center">
-            <button
-              onClick={onClose}
-              className="btn bg-primary btn-block"
-            >
+            <button onClick={onClose} className="btn bg-primary btn-block">
               Close
             </button>
           </div>
@@ -35,6 +36,6 @@ const SuccessGear = ({ onClose }) => {
       </div>
     </div>
   );
-};
+}
 
 export default SuccessGear;
