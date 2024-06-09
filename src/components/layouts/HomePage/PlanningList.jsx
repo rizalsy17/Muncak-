@@ -44,7 +44,7 @@ export default function PlanningList() {
     setSearchQuery(query);
 
     const filtered = plans.filter((plan) =>
-      plan.tripName.toLowerCase().includes(query)
+      plan.title.toLowerCase().includes(query)
     );
     setFilteredPlans(filtered);
   };
@@ -89,10 +89,11 @@ export default function PlanningList() {
       <div className="flex flex-wrap -mx-2">
         {filteredPlans.map((plan) => (
           <div className="px-2 w-full md:w-1/3 lg:w-1/3 mb-4" key={plan.id}>
-            <CardPlan
-              title={plan.tripName}
-              date={plan.startDate?.toDate().toLocaleDateString()}
-              imageUrl={plan.imageUrl}
+            <CardPlan 
+              title={plan.tripName} 
+              date={plan.startDate.toDate().toLocaleDateString()} 
+              imageUrl={plan.imageUrl} 
+              planningId={plan.id} 
             />
           </div>
         ))}

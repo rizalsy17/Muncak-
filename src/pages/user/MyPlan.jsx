@@ -1,46 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
 import NavbarHome from "../../components/layouts/HomePage/NavbarHome";
 import CardPlan from "../../components/layouts/HomePage/CardPlan";
 import useMyPlan from "../../hooks/planning/useMyPlan";
+import EditParticipants from "../../components/modal/EditParticipants";
+import EditGear from "../../components/modal/EditGear"; // Impor modal EditGear
 
 export default function MyPlan() {
   const { filteredPlans, searchTerm, handleSearch, userName } = useMyPlan();
+  const [selectedPlanningId, setSelectedPlanningId] = useState(null); // State untuk menyimpan id planning yang dipilih
+  const [isEditGearModalOpen, setIsEditGearModalOpen] = useState(false); // State untuk melacak apakah modal EditGear terbuka
+  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] = useState(false); // State untuk melacak apakah modal EditParticipants terbuka
+
+  const handleCardPlanClick = (planningId) => {
+    setSelectedPlanningId(planningId);
+  };
+
+  const openEditGearModal = () => {
+    setIsEditGearModalOpen(true);
+  };
+
+  const closeEditGearModal = () => {
+    setIsEditGearModalOpen(false);
+  };
+
+  const openEditParticipantsModal = () => {
+    setIsEditParticipantsModalOpen(true);
+  };
+
+  const closeEditParticipantsModal = () => {
+    setIsEditParticipantsModalOpen(false);
+  };
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen mt-20 p-4 md:mt-24">
-    <NavbarHome />
-    <div className="w-full max-w-6xl">
-      <div className="top-0 bg-white z-10 p-4 mb-4">
-        <div className="text-left mb-4">
-          <p className="text-xl text-red-500 font-semibold">
-            Hello, {userName || "User"}
-          </p>
-        </div>
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-          <h2 className="md:text-2xl text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis mb-2 md:mb-0">
-            My Plan
-          </h2>
-          <input
-            type="text"
-            placeholder="Search"
-            value={searchTerm}
-            onChange={(e) => handleSearch(e.target.value)}
-            className="input input-bordered w-full md:w-auto"
-          />
-        </div>
-      </div>
-      <div className="flex flex-wrap -mx-2">
-        {filteredPlans.map((plan) => (
-          <div className="px-2 w-full md:w-1/3 lg:w-1/3 mb-4" key={plan.id}>
-            <CardPlan
-              title={plan.tripName}
-              date={plan.startDate?.toDate().toLocaleDateString()}
-              imageUrl={plan.imageUrl}
+      <NavbarHome />
+      <div className="w-full max-w-6xl">
+        <div className="top-0 bg-white z-10 p-4 mb-4">
+          <div className="text-left mb-4">
+            <p className="text-xl text-red-500 font-semibold">
+              Hello, {userName || "User"}
+            </p>
+          </div>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+            <h2 className="md:text-2xl text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis mb-2 md:mb-0">
+              My Plan
+            </h2>
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={(e) => handleSearch(e.target.value)}
+              className="input input-bordered w-full md:w-auto"
             />
           </div>
-        ))}
+        </div>
+        <div className="flex flex-wrap -mx-2">
+          {filteredPlans.map((plan) => (
+            <div className="px-2 w-full md:w-1/3 lg:w-1/3 mb-4" key={plan.id}>
+              <CardPlan
+                title={plan.tripName}
+                date={plan.startDate?.toDate().toLocaleDateString()}
+                imageUrl={plan.imageUrl}
+                planningId={plan.id} // Menyertakan ID sebagai properti
+                onClick={() => handleCardPlanClick(plan.id)} // Menetapkan onClick handler
+                onEditGearClick={openEditGearModal} // Menetapkan onClick handler untuk tombol "Edit Gear"
+                onEditParticipantsClick={openEditParticipantsModal} // Menetapkan onClick handler untuk tombol "Edit Participants"
+              />
+            </div>
+          ))}
+        </div>
       </div>
+      {selectedPlanningId && isEditParticipantsModalOpen && ( // Tampilkan modal EditParticipants jika selectedPlanningId ada dan isEditParticipantsModalOpen true
+        <EditParticipants
+          closeModal={closeEditParticipantsModal}
+          planningId={selectedPlanningId} // Teruskan selectedPlanningId ke modal
+        />
+      )}
+      {isEditGearModalOpen && ( // Tampilkan modal EditGear jika isEditGearModalOpen true
+        <EditGear closeModal={closeEditGearModal} planningId={selectedPlanningId} />
+      )}
     </div>
-  </div>
   );
 }

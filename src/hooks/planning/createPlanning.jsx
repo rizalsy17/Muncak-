@@ -1,4 +1,3 @@
-/* eslint-disable import/order */
 import { useState } from "react"; 
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db, auth, storage } from "../../services/firebase/config";
@@ -11,6 +10,7 @@ const createPlanning = () => {
   const [mountain, setMountain] = useState("");
   const [participants, setParticipants] = useState(0);
   const [image, setImage] = useState(null);
+  const [newDocumentId, setNewDocumentId] = useState(null); // State untuk menyimpan ID dokumen baru
 
   const handleSubmit = async () => {
     try {
@@ -40,6 +40,7 @@ const createPlanning = () => {
       });
 
       console.log("Document written with ID: ", docRef.id);
+      setNewDocumentId(docRef.id); // Simpan ID dokumen baru ke state
     } catch (error) {
       console.error("Error adding document: ", error);
     }
@@ -64,6 +65,7 @@ const createPlanning = () => {
     image,
     handleImageChange,
     handleSubmit,
+    newDocumentId // Kembalikan ID dokumen baru dari state
   };
 };
 

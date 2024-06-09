@@ -1,7 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect } from "react";
-import addDummyUserData from "./dummyUsers";
-import addDummyPlanningData from "./dummyPlanning";
 import addDummyMemberData from "./dummyMember";
 import addDummyEquipmentData from "./dummyEquipment";
 
@@ -10,10 +8,8 @@ const addDummyData = () => {
   useEffect(() => {
     const run = async () => {
       try {
-        const userRefs = await addDummyUserData();
-        const planningRefs = await addDummyPlanningData();
-        const memberRefs = await addDummyMemberData(userRefs, planningRefs);
-        await addDummyEquipmentData(memberRefs, planningRefs);
+        const memberRefs = await addDummyMemberData();
+        await addDummyEquipmentData(memberRefs);
         console.log("All dummy data added successfully.");
       } catch (error) {
         console.error("Error running dummy data script:", error);
