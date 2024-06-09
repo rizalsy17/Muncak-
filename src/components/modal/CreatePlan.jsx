@@ -22,7 +22,7 @@ export default function CreatePlan({ closeModal }) {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     await handleSubmit();
-    closeModal(); 
+    closeModal();
   };
 
   return (

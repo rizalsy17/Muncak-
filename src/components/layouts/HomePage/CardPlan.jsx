@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaUserPlus, FaTools, FaInfoCircle, FaSignInAlt } from "react-icons/fa";
 import { useLocation } from "react-router-dom";
+import JoinRequestModal from "../../modal/JoinRequest";
 
 export default function CardPlan({
   title,
@@ -9,9 +10,17 @@ export default function CardPlan({
   planningId,
   onClick,
   onEditGearClick,
-  onEditParticipantsClick
+  onEditParticipantsClick,
 }) {
   const location = useLocation();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const handleJoinRequest = () => {
+    closeModal();
+  };
 
   return (
     <div className="bg-white shadow-sm shadow-lightText rounded-lg">
@@ -51,7 +60,7 @@ export default function CardPlan({
             )}
             {location.pathname === "/home" && (
               <button
-                onClick={() => onClick(planningId)}
+                onClick={openModal}
                 className="bg-primary text-white py-1 px-2 rounded-full"
               >
                 <FaSignInAlt />
@@ -66,6 +75,12 @@ export default function CardPlan({
           </div>
         </div>
       </div>
+      <JoinRequestModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onJoin={handleJoinRequest}
+        title={title}
+      />
     </div>
   );
 }

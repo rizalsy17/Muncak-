@@ -1,7 +1,8 @@
-import { useState } from "react"; 
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useState } from "react";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
-import { db, auth, storage } from "../../services/firebase/config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, auth, storage } from "../../services/firebase/config";
 
 const createPlanning = () => {
   const [tripName, setTripName] = useState("");
@@ -30,8 +31,8 @@ const createPlanning = () => {
 
       const docRef = await addDoc(collection(db, "Planning"), {
         tripName,
-        startDate: startTimestamp, 
-        endDate: endTimestamp, 
+        startDate: startTimestamp,
+        endDate: endTimestamp,
         imageUrl,
         mountain,
         participants,
@@ -65,7 +66,7 @@ const createPlanning = () => {
     image,
     handleImageChange,
     handleSubmit,
-    newDocumentId // Kembalikan ID dokumen baru dari state
+    newDocumentId, // Kembalikan ID dokumen baru dari state
   };
 };
 

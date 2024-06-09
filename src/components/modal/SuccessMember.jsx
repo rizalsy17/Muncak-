@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const SuccessMember = ({ onClose }) => {
+function SuccessMember({ onClose }) {
   return (
     <div className="fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50 flex">
       <div className="relative w-auto max-w-md m-auto mt-12">
@@ -20,15 +20,18 @@ const SuccessMember = ({ onClose }) => {
             </svg>
           </div>
           <div className="text-center mt-4">
-            <h3 className="text-lg font-semibold text-gray-800">Member Added Successfully!</h3>
-            <p className="text-sm text-gray-600 mt-2">You have successfully added a member to the planning.</p>
+            <h3 className="text-lg font-semibold text-gray-800">
+              Member Added Successfully!
+            </h3>
+            <p className="text-sm text-gray-600 mt-2">
+              You have successfully added a member to the planning.
+            </p>
           </div>
-          <div className="mt-6 flex justify-center">
-          </div>
+          <div className="mt-6 flex justify-center" />
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default SuccessMember;

@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
-import useMembers from '../../hooks/member/useMember';
-import { useAuth } from '../../contexts/authContext';
-import useAddMemberPlan from '../../hooks/member/useAddMemberPlan';
+import useMembers from "../../hooks/member/useMember";
+import { useAuth } from "../../contexts/authContext";
+import useAddMemberPlan from "../../hooks/member/useAddMemberPlan";
 import SuccessModal from "./SuccessMember"; // Impor modal sukses
 
 export default function EditParticipants({ closeModal, planningId }) {
   const { user } = useAuth();
   const currentUserUid = user ? user.uid : null;
   const { users } = useMembers();
-  const { 
-    selectedUser, 
-    handleSelectChange, 
+  const {
+    selectedUser,
+    handleSelectChange,
     handleAddMember,
-    error, 
-    selectedPlanning, 
+    error,
+    selectedPlanning,
     loading,
-    success 
+    success,
   } = useAddMemberPlan(planningId);
-  const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(true); 
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false); 
+  const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(true);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
 
   useEffect(() => {
     console.log("planningId:", planningId);
@@ -26,7 +26,7 @@ export default function EditParticipants({ closeModal, planningId }) {
 
   // Fungsi untuk menampilkan modal sukses
   const handleShowSuccessModal = () => {
-    setIsSuccessModalOpen(true); 
+    setIsSuccessModalOpen(true);
     setTimeout(() => {
       setIsSuccessModalOpen(false);
     }, 900);
@@ -35,8 +35,8 @@ export default function EditParticipants({ closeModal, planningId }) {
   // Mengubah state modal sukses berdasarkan nilai success
   useEffect(() => {
     if (success) {
-      setIsAddMemberModalOpen(false); 
-      handleShowSuccessModal(); 
+      setIsAddMemberModalOpen(false);
+      handleShowSuccessModal();
     }
   }, [success]);
 
@@ -44,7 +44,12 @@ export default function EditParticipants({ closeModal, planningId }) {
     <>
       {isAddMemberModalOpen && (
         <>
-          <input className="modal-state" id="edit-participants" type="checkbox" checked />
+          <input
+            className="modal-state"
+            id="edit-participants"
+            type="checkbox"
+            checked
+          />
           <div className="modal w-screen">
             <div className="modal-content flex flex-col gap-5 w-4/6 text-darkText bg-white">
               <label
@@ -60,23 +65,29 @@ export default function EditParticipants({ closeModal, planningId }) {
               <h2 className="text-xl">Add Member</h2>
               <section className="w-full">
                 <div className="form-field">
-                  <label className="form-label text-darkText">Member responsible *</label>
+                  <label className="form-label text-darkText">
+                    Member responsible *
+                  </label>
                   <select
                     className="input max-w-full bg-white border-1 text-darkText"
                     value={selectedUser}
                     onChange={handleSelectChange}
                   >
-                    <option value="" disabled>Select member</option>
-                    {users.filter(user => user.id !== currentUserUid).map(user => (
-                      <option key={user.id} value={user.id}>
-                        {user.name}
-                      </option>
-                    ))}
+                    <option value="" disabled>
+                      Select member
+                    </option>
+                    {users
+                      .filter((user) => user.id !== currentUserUid)
+                      .map((user) => (
+                        <option key={user.id} value={user.id}>
+                          {user.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </section>
               <div className="flex gap-3">
-                <button 
+                <button
                   className="btn bg-primary btn-block"
                   onClick={() => {
                     handleAddMember();
