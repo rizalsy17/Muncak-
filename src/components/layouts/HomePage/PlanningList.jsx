@@ -1,15 +1,17 @@
+// PlanningList.js
 import React, { useState, useEffect } from "react";
-import { LuPlusCircle } from "react-icons/lu";
+import { FaPlusCircle } from "react-icons/fa";
 import CardPlan from "./CardPlan";
 import CreatePlan from "../../modal/CreatePlan";
 import { collection, getDocs, addDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../services/firebase/config";
 
-export default function PlanningList() {
+export default function PlanningList({ userId, onJoinRequest }) {
   const [plans, setPlans] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredPlans, setFilteredPlans] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [requestedPlans, setRequestedPlans] = useState([]);
 
   useEffect(() => {
     const fetchPlans = async () => {
@@ -38,6 +40,21 @@ export default function PlanningList() {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    const fetchRequestedPlans = async () => {
+      if (userId) {
+        const requestSnapshot = await getDocs(
+          collection(db, "RequestMember"),
+          where("userId", "==", userId)
+        );
+        const requestedPlanIds = requestSnapshot.docs.map((doc) => doc.data().planningId);
+        setRequestedPlans(requestedPlanIds);
+      }
+    };
+
+    fetchRequestedPlans();
+  }, [userId]);
 
   const handleSearch = (event) => {
     const query = event.target.value.toLowerCase();
@@ -72,7 +89,7 @@ export default function PlanningList() {
     <div className="mt-10 w-4/5 mx-auto">
       <div className="flex items-center mt-10 mb-4">
         <h2 className="text-xl font-semibold text-darkText">Planning List</h2>
-        <LuPlusCircle
+        <FaPlusCircle
           onClick={openModal}
           className="text-2xl text-darkText cursor-pointer ml-4"
         />
@@ -94,6 +111,12 @@ export default function PlanningList() {
               date={plan.startDate.toDate().toLocaleDateString()}
               imageUrl={plan.imageUrl}
               planningId={plan.id}
+              userId={plan.userId} 
+              onJoinRequest={() => {
+                console.log("Joining plan with ID:", plan.id, "User ID:", userId);
+                onJoinRequest(plan.id);
+              }}
+              hasRequested={requestedPlans.includes(plan.id)} // Tambahkan prop hasRequested
             />
           </div>
         ))}

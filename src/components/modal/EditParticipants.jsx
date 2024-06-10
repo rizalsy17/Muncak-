@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import useMembers from "../../hooks/member/useMember";
 import { useAuth } from "../../contexts/authContext";
 import useAddMemberPlan from "../../hooks/member/useAddMemberPlan";
-import SuccessModal from "./SuccessMember"; // Impor modal sukses
+import SuccessModal from "./SuccessMember";
 
 export default function EditParticipants({ closeModal, planningId }) {
   const { user } = useAuth();
   const currentUserUid = user ? user.uid : null;
-  const { users } = useMembers();
   const {
     selectedUser,
     handleSelectChange,
@@ -16,13 +15,11 @@ export default function EditParticipants({ closeModal, planningId }) {
     selectedPlanning,
     loading,
     success,
+    requestMembers,
   } = useAddMemberPlan(planningId);
+  const { users } = useMembers();
   const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(true);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
-
-  useEffect(() => {
-    console.log("planningId:", planningId);
-  }, [planningId]);
 
   // Fungsi untuk menampilkan modal sukses
   const handleShowSuccessModal = () => {
@@ -76,13 +73,17 @@ export default function EditParticipants({ closeModal, planningId }) {
                     <option value="" disabled>
                       Select member
                     </option>
-                    {users
-                      .filter((user) => user.id !== currentUserUid)
-                      .map((user) => (
-                        <option key={user.id} value={user.id}>
-                          {user.name}
-                        </option>
-                      ))}
+                    {/* Tampilkan pengguna dari koleksi RequestMember */}
+                    {requestMembers
+                      .filter((requestMember) => requestMember.userId !== currentUserUid)
+                      .map((requestMember) => {
+                        const user = users.find(u => u.id === requestMember.userId);
+                        return (
+                          <option key={requestMember.id} value={requestMember.userId}>
+                            {user ? user.name : "Unknown User"} {/* Pastikan ini menampilkan nama pengguna */}
+                          </option>
+                        );
+                      })}
                   </select>
                 </div>
               </section>

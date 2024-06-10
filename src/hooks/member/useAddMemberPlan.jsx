@@ -8,6 +8,7 @@ import {
   query,
   where,
   getDocs,
+  updateDoc,
 } from "firebase/firestore";
 
 const useAddMemberPlan = (planningId) => {
@@ -16,6 +17,7 @@ const useAddMemberPlan = (planningId) => {
   const [selectedPlanning, setSelectedPlanning] = useState(null);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [requestMembers, setRequestMembers] = useState([]);
 
   const handleSelectChange = (e) => {
     setSelectedUser(e.target.value);
@@ -73,6 +75,22 @@ const useAddMemberPlan = (planningId) => {
         return;
       }
 
+      // Update status menjadi "joined" di collection RequestMember
+      const requestMemberRef = collection(db, "RequestMember");
+      const requestMemberQuery = query(
+        requestMemberRef,
+        where("planningId", "==", planningId),
+        where("userId", "==", selectedUser),
+        where("status", "==", "pending")
+      );
+      const requestMemberSnapshot = await getDocs(requestMemberQuery);
+
+      if (!requestMemberSnapshot.empty) {
+        const requestMemberDoc = requestMemberSnapshot.docs[0];
+        await updateDoc(requestMemberDoc.ref, { status: "joined" });
+      }
+
+      // Tambahkan user sebagai member di collection Members
       await addDoc(collection(db, "Members"), {
         userId: selectedUser,
         planningId: planningId,
@@ -114,6 +132,30 @@ const useAddMemberPlan = (planningId) => {
   }, [planningId]);
 
   useEffect(() => {
+    const fetchRequestMembers = async () => {
+      try {
+        const requestMemberQuery = query(
+          collection(db, "RequestMember"),
+          where("planningId", "==", planningId),
+          where("status", "==", "pending")
+        );
+        const requestMemberSnapshot = await getDocs(requestMemberQuery);
+        const requestMemberData = requestMemberSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setRequestMembers(requestMemberData);
+      } catch (error) {
+        console.error("Error fetching request members:", error);
+      }
+    };
+
+    if (planningId) {
+      fetchRequestMembers();
+    }
+  }, [planningId]);
+
+  useEffect(() => {
     setSuccess(false);
   }, [planningId]);
 
@@ -125,6 +167,7 @@ const useAddMemberPlan = (planningId) => {
     selectedPlanning,
     loading,
     success,
+    requestMembers,
   };
 };
 
