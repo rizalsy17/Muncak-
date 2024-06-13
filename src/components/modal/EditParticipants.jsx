@@ -1,110 +1,120 @@
 import React, { useEffect, useState } from "react";
 import useMembers from "../../hooks/member/useMember";
-import { useAuth } from "../../contexts/authContext";
-import useAddMemberPlan from "../../hooks/member/useAddMemberPlan";
-import SuccessModal from "./SuccessMember";
+import { db } from "../../services/firebase/config";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 
-export default function EditParticipants({ closeModal, planningId }) {
-  const { user } = useAuth();
-  const currentUserUid = user ? user.uid : null;
-  const {
-    selectedUser,
-    handleSelectChange,
-    handleAddMember,
-    error,
-    selectedPlanning,
-    loading,
-    success,
-    requestMembers,
-  } = useAddMemberPlan(planningId);
+export default function EditParticipants({ isOpen, closeModal, planningId }) {
   const { users } = useMembers();
-  const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(true);
-  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [requestMembers, setRequestMembers] = useState([]);
 
-  // Fungsi untuk menampilkan modal sukses
-  const handleShowSuccessModal = () => {
-    setIsSuccessModalOpen(true);
-    setTimeout(() => {
-      setIsSuccessModalOpen(false);
-    }, 900);
+  useEffect(() => {
+    const fetchJoinRequests = async () => {
+      if (planningId) {
+        const requestQuery = query(
+          collection(db, "RequestMember"),
+          where("planningId", "==", planningId),
+          where("status", "==", "pending")
+        );
+
+        const requestSnapshot = await getDocs(requestQuery);
+        const requests = requestSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setRequestMembers(requests);
+      }
+    };
+
+    fetchJoinRequests();
+  }, [planningId]);
+
+  const approveJoinRequest = async (requestId) => {
+    const requestDocRef = doc(db, "RequestMember", requestId);
+    await updateDoc(requestDocRef, { status: "approved" });
+    setRequestMembers(
+      requestMembers.filter((request) => request.id !== requestId)
+    );
   };
 
-  // Mengubah state modal sukses berdasarkan nilai success
-  useEffect(() => {
-    if (success) {
-      setIsAddMemberModalOpen(false);
-      handleShowSuccessModal();
-    }
-  }, [success]);
+  const rejectJoinRequest = async (requestId) => {
+    const requestDocRef = doc(db, "RequestMember", requestId);
+    await updateDoc(requestDocRef, { status: "rejected" });
+    setRequestMembers(
+      requestMembers.filter((request) => request.id !== requestId)
+    );
+  };
+
+  if (!isOpen) return null;
 
   return (
     <>
-      {isAddMemberModalOpen && (
-        <>
-          <input
-            className="modal-state"
-            id="edit-participants"
-            type="checkbox"
-            checked
-          />
-          <div className="modal w-screen">
-            <div className="modal-content flex flex-col gap-5 w-4/6 text-darkText bg-white">
-              <label
-                htmlFor="edit-participants"
-                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-black hover:bg-gray-200"
-                onClick={() => {
-                  setIsAddMemberModalOpen(false);
-                  closeModal();
-                }}
-              >
-                ✕
-              </label>
-              <h2 className="text-xl">Add Member</h2>
-              <section className="w-full">
-                <div className="form-field">
-                  <label className="form-label text-darkText">
-                    Member responsible *
-                  </label>
-                  <select
-                    className="input max-w-full bg-white border-1 text-darkText"
-                    value={selectedUser}
-                    onChange={handleSelectChange}
+      <input
+        className="modal-state"
+        id="edit-participants"
+        type="checkbox"
+        checked
+        onChange={closeModal}
+      />
+      <div className="modal w-screen">
+        <div className="modal-content flex flex-col gap-5 w-4/6 text-darkText bg-white">
+          <label
+            htmlFor="edit-participants"
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-black hover:bg-gray-200"
+            onClick={closeModal}
+          >
+            ✕
+          </label>
+          <h2 className="text-xl">Join Requests</h2>
+
+          <div className="mt-8">
+            {requestMembers.length === 0 ? (
+              <p>No join requests at the moment.</p>
+            ) : (
+              <ul className="list-disc pl-4">
+                {requestMembers.map((request) => (
+                  <li
+                    key={request.id}
+                    className="flex items-center justify-between"
                   >
-                    <option value="" disabled>
-                      Select member
-                    </option>
-                    {/* Tampilkan pengguna dari koleksi RequestMember */}
-                    {requestMembers
-                      .filter((requestMember) => requestMember.userId !== currentUserUid)
-                      .map((requestMember) => {
-                        const user = users.find(u => u.id === requestMember.userId);
-                        return (
-                          <option key={requestMember.id} value={requestMember.userId}>
-                            {user ? user.name : "Unknown User"} {/* Pastikan ini menampilkan nama pengguna */}
-                          </option>
-                        );
-                      })}
-                  </select>
-                </div>
-              </section>
-              <div className="flex gap-3">
-                <button
-                  className="btn bg-primary btn-block"
-                  onClick={() => {
-                    handleAddMember();
-                  }}
-                  disabled={!selectedUser || loading}
-                >
-                  Add Member
-                </button>
-              </div>
-              {error && <p className="text-red-500">{error}</p>}
-            </div>
+                    <div>
+                      <p>
+                        {users.find((u) => u.id === request.userId)?.name ||
+                          "Unknown User"}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        Requested at:{" "}
+                        {request.timestamp.toDate().toLocaleString()}
+                      </p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        className="btn btn-success"
+                        onClick={() => approveJoinRequest(request.id)}
+                      >
+                        Approve
+                      </button>
+                      <button
+                        className="btn btn-error"
+                        onClick={() => rejectJoinRequest(request.id)}
+                      >
+                        Reject
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
-        </>
-      )}
-      {/* Tampilkan modal sukses jika isSuccessModalOpen true */}
-      {isSuccessModalOpen && <SuccessModal />}
+        </div>
+      </div>
     </>
   );
 }

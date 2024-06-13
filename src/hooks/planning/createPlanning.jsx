@@ -11,7 +11,7 @@ const createPlanning = () => {
   const [mountain, setMountain] = useState("");
   const [participants, setParticipants] = useState(0);
   const [image, setImage] = useState(null);
-  const [newDocumentId, setNewDocumentId] = useState(null); // State untuk menyimpan ID dokumen baru
+  const [newDocumentId, setNewDocumentId] = useState(null);
 
   const handleSubmit = async () => {
     try {
@@ -20,12 +20,22 @@ const createPlanning = () => {
         throw new Error("No user is logged in");
       }
 
+      if (
+        !tripName ||
+        !startDate ||
+        !endDate ||
+        !mountain ||
+        !participants ||
+        !image
+      ) {
+        throw new Error("All fields are required");
+      }
+
       const storageRef = ref(storage, `images/${image.name}`);
       await uploadBytes(storageRef, image);
 
       const imageUrl = await getDownloadURL(storageRef);
 
-      // Convert startDate and endDate to Timestamp
       const startTimestamp = Timestamp.fromDate(new Date(startDate));
       const endTimestamp = Timestamp.fromDate(new Date(endDate));
 
@@ -41,7 +51,7 @@ const createPlanning = () => {
       });
 
       console.log("Document written with ID: ", docRef.id);
-      setNewDocumentId(docRef.id); // Simpan ID dokumen baru ke state
+      setNewDocumentId(docRef.id);
     } catch (error) {
       console.error("Error adding document: ", error);
     }
@@ -66,7 +76,7 @@ const createPlanning = () => {
     image,
     handleImageChange,
     handleSubmit,
-    newDocumentId, // Kembalikan ID dokumen baru dari state
+    newDocumentId,
   };
 };
 

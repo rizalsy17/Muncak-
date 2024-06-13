@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NavbarHome from "../components/layouts/HomePage/NavbarHome";
 import WelcomeSection from "../components/layouts/HomePage/WelcomeSection";
 import PlanningList from "../components/layouts/HomePage/PlanningList";
-import JoinRequestModal from "../components/modal/JoinRequest"; 
+import JoinRequestModal from "../components/modal/JoinRequest";
 import { useAuth } from "../contexts/authContext";
 
 export default function HomePage() {
