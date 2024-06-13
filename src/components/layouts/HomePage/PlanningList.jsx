@@ -48,7 +48,9 @@ export default function PlanningList({ userId, onJoinRequest }) {
           collection(db, "RequestMember"),
           where("userId", "==", userId)
         );
-        const requestedPlanIds = requestSnapshot.docs.map((doc) => doc.data().planningId);
+        const requestedPlanIds = requestSnapshot.docs.map(
+          (doc) => doc.data().planningId
+        );
         setRequestedPlans(requestedPlanIds);
       }
     };
@@ -111,9 +113,14 @@ export default function PlanningList({ userId, onJoinRequest }) {
               date={plan.startDate.toDate().toLocaleDateString()}
               imageUrl={plan.imageUrl}
               planningId={plan.id}
-              userId={plan.userId} 
+              userId={plan.userId}
               onJoinRequest={() => {
-                console.log("Joining plan with ID:", plan.id, "User ID:", userId);
+                console.log(
+                  "Joining plan with ID:",
+                  plan.id,
+                  "User ID:",
+                  userId
+                );
                 onJoinRequest(plan.id);
               }}
               hasRequested={requestedPlans.includes(plan.id)} // Tambahkan prop hasRequested

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { db } from "../../services/firebase/config";
 import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../services/firebase/config";
 
 const useMembers = () => {
   const [users, setUsers] = useState([]);
