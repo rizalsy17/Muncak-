@@ -1,7 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useAddGear from "../../hooks/gear/useAddGear";
 import usePlanMembersWithNames from "../../hooks/gear/usePlanMembersWithNames";
 import SuccessGear from "./SuccessGear"; // Import modal SuccessGear
+import {
+  doc,
+  getDoc,
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "../../services/firebase/config";
+import useMembers from "../../hooks/member/useMember";
 
 export default function EditGear({ closeModal, planningId }) {
   const { planMembersWithNames, loading, error } =
@@ -14,11 +24,47 @@ export default function EditGear({ closeModal, planningId }) {
     budget,
     setBudget,
     selectedMember,
+    planMembers,
     setSelectedMember,
     handleAddGear,
     showSuccessModal,
     setShowSuccessModal,
   } = useAddGear(closeModal, planningId);
+  const [participants, setParticipants] = useState([]);
+  const { users } = useMembers();
+
+  useEffect(() => {
+    const fetchParticipants = async () => {
+      try {
+        const membersQuery = query(
+          collection(db, "RequestMember"),
+          where("planningId", "==", planningId),
+          where("status", "==", "approved")
+        );
+
+        const membersSnapshot = await getDocs(membersQuery);
+        const membersList = membersSnapshot.docs.map((doc) => doc.data());
+
+        if (users.length !== 0 && membersList.length) {
+          const data = membersList.map((value) => {
+            const user = users.find((value1) => {
+              if (value.userId === value1.id) {
+                return value1;
+              }
+            });
+            return user;
+          });
+          setParticipants(data);
+        }
+      } catch (error) {
+        console.error("Error fetching participants:", error);
+      }
+    };
+
+    if (planningId) {
+      fetchParticipants();
+    }
+  }, [planningId, users]);
 
   useEffect(() => {
     if (showSuccessModal) {
@@ -51,7 +97,7 @@ export default function EditGear({ closeModal, planningId }) {
             <div className="modal-content flex flex-col gap-5 w-4/6 text-darkText bg-white">
               <label
                 htmlFor="edit-gear"
-                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-black hover:bg-gray-200"
+                className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-darkText hover:bg-gray-200"
                 onClick={closeModal}
               >
                 ✕
@@ -109,8 +155,8 @@ export default function EditGear({ closeModal, planningId }) {
                       <option value="" disabled>
                         Select member
                       </option>
-                      {planMembersWithNames.map((user) => (
-                        <option key={user.id} value={user.id}>
+                      {participants.map((user) => (
+                        <option key={user.id} value={user.name}>
                           {user.name}
                         </option>
                       ))}
