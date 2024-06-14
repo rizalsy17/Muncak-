@@ -14,13 +14,18 @@ const useAddGear = (closeModal, planningId) => {
 
   const handleAddGear = async () => {
     try {
+      console.log(gearName);
+      console.log(amount);
+      console.log(budget);
+      console.log(selectedMember);
       // Validation
       if (!gearName || !amount || !budget || !selectedMember) {
         setError("Please fill in all fields");
         return;
       }
 
-      await addDoc(collection(db, `Gear/${planningId}/items`), {
+      await addDoc(collection(db, `Gear`), {
+        planningId,
         gearName,
         amount: parseInt(amount),
         budget: parseInt(budget),
