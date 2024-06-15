@@ -41,6 +41,10 @@ export default function MyPlan() {
             <p className="text-xl text-red-500 font-semibold">
               Hello, {userName || "User"}
             </p>
+            <p className="text-gray-600">
+              Welcome back! Here you can manage all your plans. Feel free to
+              search, edit, or view the details of your trips.
+            </p>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
             <h2 className="md:text-2xl text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis mb-2 md:mb-0">
@@ -51,7 +55,7 @@ export default function MyPlan() {
               placeholder="Search"
               value={searchTerm}
               onChange={(e) => handleSearch(e.target.value)}
-              className="input input-bordered w-full md:w-auto"
+              className="input input-bordered w-full md:w-auto p-2 bg-white border border-lightText rounded-xl focus:outline-none text-darkText size-8"
             />
           </div>
         </div>
