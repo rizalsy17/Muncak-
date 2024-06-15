@@ -92,7 +92,8 @@ export default function CardPlan({
               <>
                 <button
                   onClick={openEditParticipantsModal}
-                  className="bg-primary text-white py-1 px-2 rounded-full"
+                  className="bg-primary text-white py-1 px-2 rounded-full tooltip tooltip-top"
+                  data-tooltip="Join Request"
                 >
                   <FaUserPlus />
                 </button>
@@ -101,7 +102,8 @@ export default function CardPlan({
                     onClick(planningId);
                     onEditGearClick();
                   }}
-                  className="bg-primary text-white py-1 px-2 rounded-full"
+                  className="bg-primary text-white py-1 px-2 rounded-full tooltip tooltip-top"
+                  data-tooltip="Add Gear"
                 >
                   <FaTools />
                 </button>
@@ -137,7 +139,8 @@ export default function CardPlan({
             )}
             <button
               onClick={openDetailOwnerModal}
-              className="bg-primary text-white py-1 px-2 rounded-full"
+              className="bg-primary text-white py-1 px-2 rounded-full tooltip tooltip-top"
+              data-tooltip="Detail Plan"
             >
               <FaInfoCircle />
             </button>
@@ -160,7 +163,7 @@ export default function CardPlan({
         />
       )}
       {isDetailOwnerModalOpen && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-darkText bg-opacity-50 flex items-center justify-center z-50">
           <DetailOwner
             closeModal={closeDetailOwnerModal}
             planningId={planningId}
