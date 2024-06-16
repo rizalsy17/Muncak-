@@ -7,10 +7,10 @@ import EditGear from "../../components/modal/EditGear"; // Impor modal EditGear
 
 export default function MyPlan() {
   const { filteredPlans, searchTerm, handleSearch, userName } = useMyPlan();
-  const [selectedPlanningId, setSelectedPlanningId] = useState(null); // State untuk menyimpan id planning yang dipilih
-  const [isEditGearModalOpen, setIsEditGearModalOpen] = useState(false); // State untuk melacak apakah modal EditGear terbuka
+  const [selectedPlanningId, setSelectedPlanningId] = useState(null);
+  const [isEditGearModalOpen, setIsEditGearModalOpen] = useState(false); 
   const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] =
-    useState(false); // State untuk melacak apakah modal EditParticipants terbuka
+    useState(false);
 
   const handleCardPlanClick = (planningId) => {
     setSelectedPlanningId(planningId);

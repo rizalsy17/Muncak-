@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { MdOutlineGTranslate } from "react-icons/md";
+import { MdOutlineGTranslate, MdPerson } from "react-icons/md"; // Import icon profile
 import logo from "../../../assets/muncak-logo.svg";
 import { logout } from "../../../services/firebase/auth";
 import CreatePlan from "../../modal/CreatePlan";
+import ProfileModal from "../../modal/ProfileModal"; // Import Profile Modal
 
 export default function NavbarHome() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreatePlanModalOpen, setIsCreatePlanModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false); // State for profile modal
 
   const handleLogout = async () => {
     try {
@@ -18,12 +20,20 @@ export default function NavbarHome() {
     }
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const openCreatePlanModal = () => {
+    setIsCreatePlanModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const closeCreatePlanModal = () => {
+    setIsCreatePlanModalOpen(false);
+  };
+
+  const openProfileModal = () => {
+    setIsProfileModalOpen(true);
+  };
+
+  const closeProfileModal = () => {
+    setIsProfileModalOpen(false);
   };
 
   return (
@@ -48,13 +58,14 @@ export default function NavbarHome() {
             </Link>
             <Link
               className="text-lightText hover:text-darkText font-light"
-              onClick={openModal}
+              onClick={openCreatePlanModal}
             >
               Create Plan
             </Link>
           </div>
           <div className="flex items-center space-x-4">
             <MdOutlineGTranslate />
+            <MdPerson onClick={openProfileModal} className="cursor-pointer" /> {/* Profile Icon */}
             <Link
               onClick={handleLogout}
               className="btn-rounded btn bg-white border border-darkText rounded-lg text-darkText font-light"
@@ -64,7 +75,8 @@ export default function NavbarHome() {
           </div>
         </div>
       </div>
-      {isModalOpen && <CreatePlan closeModal={closeModal} />}
+      {isCreatePlanModalOpen && <CreatePlan closeModal={closeCreatePlanModal} />}
+      {isProfileModalOpen && <ProfileModal closeModal={closeProfileModal} />} {/* Profile Modal */}
     </div>
   );
 }

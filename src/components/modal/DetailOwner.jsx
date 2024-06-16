@@ -12,8 +12,6 @@ import {
 } from "firebase/firestore";
 import { db } from "../../services/firebase/config";
 import useMembers from "../../hooks/member/useMember";
-import { useAuth } from "../../contexts/authContext";
-// import { getUserName } from "../../services/firebase/auth";
 
 export default function DetailOwner({
   planningId,
@@ -23,7 +21,7 @@ export default function DetailOwner({
 }) {
   const [tripData, setTripData] = useState(null);
   const [participants, setParticipants] = useState([]);
-  const [gears, setGears] = useState();
+  const [gears, setGears] = useState([]);
 
   const { users } = useMembers();
 
@@ -41,11 +39,7 @@ export default function DetailOwner({
 
         if (users.length !== 0 && membersList.length) {
           const data = membersList.map((value) => {
-            const user = users.find((value1) => {
-              if (value.userId === value1.id) {
-                return value1;
-              }
-            });
+            const user = users.find((value1) => value.userId === value1.id);
             return user;
           });
           setParticipants(data);
@@ -126,6 +120,7 @@ export default function DetailOwner({
           />
           <div className="p-6 font-medium space-y-3">
             <p className="text-2xl font-bold">{tripData.tripName}</p>
+            <p className="text-md font-semibold text-gray-500">Created by: {tripData.userEmail}</p>
             <div className="divider mt-2 mb-4" />
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Trip Information</h3>
@@ -148,13 +143,11 @@ export default function DetailOwner({
               <p className="text-lg font-semibold">Participants</p>
               <p className="font-semibold mt-3">List of Participants: </p>
               {participants.length > 0 ? (
-                participants.map((participant, index) => {
-                  return (
-                    <p key={index} className="text-gray-600 font-normal">
-                      {index + 1}. {participant.name ?? ""}
-                    </p>
-                  );
-                })
+                participants.map((participant, index) => (
+                  <p key={index} className="text-gray-600 font-normal">
+                    {index + 1}. {participant.name ?? ""}
+                  </p>
+                ))
               ) : (
                 <p className="font-normal text-gray-600">
                   No participants yet.

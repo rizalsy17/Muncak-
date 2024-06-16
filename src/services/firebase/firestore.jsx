@@ -1,5 +1,4 @@
-// src/services/firebase/firestore.js
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, getDoc } from "firebase/firestore";
 import { db } from "./config";
 
 export const addUser = (userId, userData) => {
@@ -37,5 +36,21 @@ export const addEquipment = async (equipmentId, equipmentData) => {
   } catch (error) {
     console.error("Error adding equipment: ", error);
     throw error; // throw the error for further handling
+  }
+};
+
+export const getUser = async (userId) => {
+  try {
+    const userRef = doc(db, "Users", userId);
+    const userDoc = await getDoc(userRef);
+    if (userDoc.exists()) {
+      return userDoc.data();
+    } else {
+      console.log("No such document!");
+      return null;
+    }
+  } catch (error) {
+    console.error("Error getting user:", error);
+    throw error;
   }
 };

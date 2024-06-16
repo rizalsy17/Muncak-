@@ -5,9 +5,8 @@ import {
   login as firebaseLogin,
   logout as firebaseLogout,
   onAuthStateChange,
-  getUserName,
 } from "../services/firebase/auth";
-import { addUser } from "../services/firebase/firestore";
+import { addUser, getUser } from "../services/firebase/firestore";
 
 const authContext = createContext();
 
@@ -17,10 +16,11 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChange((user) => {
+    const unsubscribe = onAuthStateChange(async (user) => {
       setUser(user);
       if (user) {
-        setUserName(getUserName(user));
+        const userData = await getUser(user.uid);
+        setUserName(userData?.name || "");
       } else {
         setUserName("");
       }
@@ -34,13 +34,11 @@ export function AuthProvider({ children }) {
       const userCredential = await firebaseRegister(email, password);
       const { user } = userCredential;
 
-      console.log(user);
       if (user) {
         await addUser(user.uid, {
           email: user.email,
           name,
         });
-        // await user.updateProfile({ displayName: name });
         setUserName(name);
       }
     } catch (error) {
@@ -52,6 +50,10 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     try {
       await firebaseLogin(email, password);
+      if (user) {
+        const userData = await getUser(user.uid);
+        setUserName(userData?.name || "");
+      }
     } catch (error) {
       console.error("Error logging in:", error);
       throw error;
@@ -62,6 +64,7 @@ export function AuthProvider({ children }) {
     try {
       await firebaseLogout();
       setUser(null);
+      setUserName("");
     } catch (error) {
       console.error("Error logging out:", error);
     }

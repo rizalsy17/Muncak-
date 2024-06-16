@@ -1,4 +1,5 @@
 import React from "react";
+import rzImage from '../../assets/rz.jpg';
 
 export default function About() {
   return (
@@ -60,13 +61,10 @@ export default function About() {
           </div>
           <div className="rounded p-4 flex flex-col items-center text-darkText">
             <div className="avatar avatar-ring-primary avatar-xl w-24 h-24 mb-4 avatar-ring-error">
-              <img
-                src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                alt="avatar"
-              />
+            <img src={rzImage} alt="avatar" />
             </div>
             <p className="font-semibold">Ahmad Rizal E.S</p>
-            <p className="text-sm">Universitas Brawijaya</p>
+            <p className="text-sm">Institut Teknologi dan Bisnis Asia Malang</p>
           </div>
         </div>
       </div>
