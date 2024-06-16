@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { MdOutlineGTranslate, MdPerson } from "react-icons/md"; // Import icon profile
+import { MdPerson } from "react-icons/md"; // Import icon profile
 import logo from "../../../assets/muncak-logo.svg";
 import { logout } from "../../../services/firebase/auth";
 import CreatePlan from "../../modal/CreatePlan";
@@ -64,19 +64,25 @@ export default function NavbarHome() {
             </Link>
           </div>
           <div className="flex items-center space-x-4">
-            <MdOutlineGTranslate />
-            <MdPerson onClick={openProfileModal} className="cursor-pointer" /> {/* Profile Icon */}
             <Link
               onClick={handleLogout}
               className="btn-rounded btn bg-white border border-darkText rounded-lg text-darkText font-light"
             >
               Logout
             </Link>
+            <MdPerson
+              onClick={openProfileModal}
+              className="cursor-pointer text-darkText size-8"
+            />{" "}
+            {/* Profile Icon */}
           </div>
         </div>
       </div>
-      {isCreatePlanModalOpen && <CreatePlan closeModal={closeCreatePlanModal} />}
-      {isProfileModalOpen && <ProfileModal closeModal={closeProfileModal} />} {/* Profile Modal */}
+      {isCreatePlanModalOpen && (
+        <CreatePlan closeModal={closeCreatePlanModal} />
+      )}
+      {isProfileModalOpen && <ProfileModal closeModal={closeProfileModal} />}{" "}
+      {/* Profile Modal */}
     </div>
   );
 }
