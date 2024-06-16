@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from "react";
-import useMembers from "../../hooks/member/useMember";
-import { db } from "../../services/firebase/config";
 import {
   collection,
   query,
@@ -8,8 +8,9 @@ import {
   getDocs,
   updateDoc,
   doc,
-  deleteDoc,
 } from "firebase/firestore";
+import useMembers from "../../hooks/member/useMember";
+import { db } from "../../services/firebase/config";
 
 export default function EditParticipants({ isOpen, closeModal, planningId }) {
   const { users } = useMembers();
@@ -74,7 +75,7 @@ export default function EditParticipants({ isOpen, closeModal, planningId }) {
           </label>
           <h2 className="text-xl">Join Requests</h2>
 
-          <div className="mt-8">
+          <div className="mt-3 mb-3 text-center">
             {requestMembers.length === 0 ? (
               <p>No join requests at the moment.</p>
             ) : (
@@ -85,7 +86,7 @@ export default function EditParticipants({ isOpen, closeModal, planningId }) {
                     className="flex items-center justify-between"
                   >
                     <div>
-                      <p>
+                      <p className="text-left">
                         {users.find((u) => u.id === request.userId)?.name ||
                           "Unknown User"}
                       </p>
@@ -96,13 +97,13 @@ export default function EditParticipants({ isOpen, closeModal, planningId }) {
                     </div>
                     <div className="flex gap-2">
                       <button
-                        className="btn btn-success"
+                        className="btn bg-primary"
                         onClick={() => approveJoinRequest(request.id)}
                       >
                         Approve
                       </button>
                       <button
-                        className="btn btn-error"
+                        className="btn bg-gray-200 text-darkText"
                         onClick={() => rejectJoinRequest(request.id)}
                       >
                         Reject
