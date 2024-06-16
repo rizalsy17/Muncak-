@@ -120,7 +120,9 @@ export default function DetailOwner({
           />
           <div className="p-6 font-medium space-y-3">
             <p className="text-2xl font-bold">{tripData.tripName}</p>
-            <p className="text-md font-semibold text-gray-500">Created by: {tripData.userEmail}</p>
+            <p className="text-md font-semibold text-gray-500">
+              Created by: {tripData.userEmail}
+            </p>
             <div className="divider mt-2 mb-4" />
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Trip Information</h3>
