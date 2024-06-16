@@ -46,22 +46,11 @@ export default function NavbarAuth() {
           </div>
         </div>
         {isMobileMenuOpen && (
-          <div className="md:hidden">
-            <div className="flex flex-col space-y-4 py-4">
-              <Link to="/" className="text-black">
+          <div className="md:hidden flex flex-col items-center bg-white">
+            <div className="flex flex-col space-y-4 py-4 items-center">
+              <Link to="/" className="text-lightText">
                 Home
               </Link>
-              {/* Add more links as needed */}
-              <FontAwesomeIcon
-                icon={faMoon}
-                className="text-black cursor-pointer"
-                size="2x"
-              />
-              <FontAwesomeIcon
-                icon={faLanguage}
-                className="text-black cursor-pointer"
-                size="2x"
-              />
             </div>
           </div>
         )}

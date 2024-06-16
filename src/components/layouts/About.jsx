@@ -1,9 +1,12 @@
 import React from "react";
-import rzImage from '../../assets/rz.jpg';
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import rzImage from "../../assets/rz.jpg";
+import nandaImage from "../../assets/nanda.jpg";
+import nareshImage from "../../assets/naresh.jpg";
 
 export default function About() {
   return (
-    <div className="container mt-20 mx-auto min-h-screen px-4 sm font-light:px-6 lg:px-8">
+    <div className="container mx-auto min-h-screen px-4 py-20 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-darkText">
         <div className="flex justify-center items-center">
           <p className="text-4xl font-semibold">
@@ -38,33 +41,77 @@ export default function About() {
         <p className="text-4xl font-semibold text-center text-darkText">
           <span className="text-primary">OUR</span> TEAM
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 mt-4">
           <div className="rounded p-4 flex flex-col items-center text-darkText">
-            <div className="avatar avatar-ring-primary avatar-xl w-24 h-24 mb-4 avatar-ring-error">
-              <img
-                src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                alt="avatar"
-              />
+            <div className="avatar avatar-ring-error avatar-xl w-24 h-24 mb-4">
+              <img src={nareshImage} alt="avatar" />
             </div>
             <p className="font-semibold">Naresh Pratista</p>
             <p className="text-sm">Politeknik Negeri Malang</p>
+            <div className="flex mt-2 space-x-2 item-center">
+              <a
+                href="https://github.com/NareshPratista28"
+                target="_blank"
+                className="text-darkText hover:text-primary transition-colors"
+              >
+                <FaGithub size={22} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/nareshpratista/"
+                target="_blank"
+                className="text-darkText hover:text-primary transition-colors"
+              >
+                <FaLinkedin size={22} />
+              </a>
+            </div>
           </div>
           <div className="rounded p-4 flex flex-col items-center text-darkText">
-            <div className="avatar avatar-ring-primary avatar-xl w-24 h-24 mb-4 avatar-ring-error">
-              <img
-                src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
-                alt="avatar"
-              />
+            <div className="avatar avatar-xl w-24 h-24 mb-4 avatar-ring-error">
+              <img src={nandaImage} alt="avatar" />
             </div>
             <p className="font-semibold">Ananda Galih Pratiwi</p>
             <p className="text-sm">Politeknik Negeri Malang</p>
+            <div className="flex mt-2 space-x-2 item-center">
+              <a
+                href="https://github.com/nandaglhp"
+                target="_blank"
+                className="text-darkText hover:text-primary transition-colors"
+              >
+                <FaGithub size={22} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/nandaglhp/"
+                target="_blank"
+                className="text-darkText hover:text-primary transition-colors"
+              >
+                <FaLinkedin size={22} />
+              </a>
+            </div>
           </div>
           <div className="rounded p-4 flex flex-col items-center text-darkText">
-            <div className="avatar avatar-ring-primary avatar-xl w-24 h-24 mb-4 avatar-ring-error">
-            <img src={rzImage} alt="avatar" />
+            <div className="avatar avatar-xl w-24 h-24 mb-4 avatar-ring-error">
+              <img src={rzImage} alt="avatar" />
             </div>
             <p className="font-semibold">Ahmad Rizal E.S</p>
-            <p className="text-sm">Institut Teknologi dan Bisnis Asia Malang</p>
+            <p className="text-sm text-center">
+              Institut Teknologi dan Bisnis Asia Malang
+            </p>
+            <div className="flex mt-2 space-x-2 item-center">
+              <a
+                href="https://github.com/rizalsy17"
+                target="_blank"
+                className="text-darkText hover:text-primary transition-colors"
+              >
+                <FaGithub size={22} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/ahmad-rizal-a54890226/"
+                target="_blank"
+                className="text-darkText hover:text-primary transition-colors"
+              >
+                <FaLinkedin size={22} />
+              </a>
+            </div>
           </div>
         </div>
       </div>
