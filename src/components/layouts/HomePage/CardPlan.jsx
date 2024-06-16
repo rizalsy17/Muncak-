@@ -11,7 +11,9 @@ import { useLocation } from "react-router-dom";
 import JoinRequestModal from "../../modal/JoinRequest";
 import EditParticipantsModal from "../../modal/EditParticipants";
 import DetailOwner from "../../modal/DetailOwner";
+import EditPlanModal from "../../modal/EditPlanModal"; // Import EditPlanModal
 import { useAuth } from "../../../contexts/authContext";
+import DeleteConfirmation from "../../modal/DeleteConfirmation";
 
 export default function CardPlan({
   title,
@@ -34,8 +36,11 @@ export default function CardPlan({
   const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] =
     useState(false);
   const [isDetailOwnerModalOpen, setIsDetailOwnerModalOpen] = useState(false);
+  const [isEditPlanModalOpen, setIsEditPlanModalOpen] = useState(false);
   const [isAlreadyJoined, setIsAlreadyJoined] = useState(false);
   const [hasAlreadyRequested, setHasAlreadyRequested] = useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
 
   const openJoinRequestModal = () => setIsJoinRequestModalOpen(true);
   const closeJoinRequestModal = () => setIsJoinRequestModalOpen(false);
@@ -44,6 +49,10 @@ export default function CardPlan({
     setIsEditParticipantsModalOpen(false);
   const openDetailOwnerModal = () => setIsDetailOwnerModalOpen(true);
   const closeDetailOwnerModal = () => setIsDetailOwnerModalOpen(false);
+  const openEditPlanModal = () => setIsEditPlanModalOpen(true);
+  const closeEditPlanModal = () => setIsEditPlanModalOpen(false);
+  const openDeleteConfirmation = () => setIsDeleteConfirmationOpen(true);
+  const closeDeleteConfirmation = () => setIsDeleteConfirmationOpen(false);
 
   useEffect(() => {
     if (userId === currentUserUid) {
@@ -59,6 +68,14 @@ export default function CardPlan({
       setIsJoinRequestModalOpen(false);
       setHasAlreadyRequested(true);
     }
+  };
+
+  const handleEditPlanSave = (updatedPlan) => {
+    onEditPlanClick(updatedPlan);
+  };
+  const handleDeleteConfirm = () => {
+    onDeletePlanClick(planningId);
+    closeDeleteConfirmation();
   };
 
   return (
@@ -108,14 +125,16 @@ export default function CardPlan({
                   <FaTools />
                 </button>
                 <button
-                  onClick={() => onEditPlanClick(planningId)}
-                  className="bg-primary text-white py-1 px-2 rounded-full"
+                  onClick={openEditPlanModal}
+                  className="bg-primary text-white py-1 px-2 rounded-full tooltip tooltip-top"
+                  data-tooltip="Edit Plan"
                 >
                   <FaEdit />
                 </button>
                 <button
-                  onClick={() => onDeletePlanClick(planningId)}
-                  className="bg-red-500 text-white py-1 px-2 rounded-full"
+                  onClick={openDeleteConfirmation}
+                  className="bg-primary text-white py-1 px-2 rounded-full tooltip tooltip-top"
+                  data-tooltip="Delete Plan"
                 >
                   <FaTrashAlt />
                 </button>
@@ -173,6 +192,21 @@ export default function CardPlan({
             imageUrl={imageUrl}
           />
         </div>
+      )}
+      {isEditPlanModalOpen && (
+        <EditPlanModal
+          closeModal={closeEditPlanModal}
+          planningId={planningId}
+          onSave={handleEditPlanSave}
+        />
+      )}
+      {isDeleteConfirmationOpen && (
+        <DeleteConfirmation
+          isOpen={isDeleteConfirmationOpen}
+          onClose={closeDeleteConfirmation}
+          planningId={planningId}
+          onDeleteSuccess={handleDeleteConfirm}
+        />
       )}
     </div>
   );
