@@ -5,6 +5,8 @@ import {
   addDoc,
   onSnapshot,
   where,
+  deleteDoc,
+  doc,
 } from "firebase/firestore";
 import { FaPlusCircle } from "react-icons/fa";
 import CardPlan from "./CardPlan";
@@ -90,6 +92,11 @@ export default function PlanningList({ userId, onJoinRequest }) {
     }
   };
 
+  const deletePlan = (planId) => {
+    setPlans(plans.filter((plan) => plan.id !== planId));
+    setFilteredPlans(filteredPlans.filter((plan) => plan.id !== planId));
+  };
+
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -136,6 +143,7 @@ export default function PlanningList({ userId, onJoinRequest }) {
                   onJoinRequest(plan.id);
                 }}
                 hasRequested={requestedPlans.includes(plan.id)}
+                onDeletePlanClick={deletePlan}
               />
             </div>
           ))}

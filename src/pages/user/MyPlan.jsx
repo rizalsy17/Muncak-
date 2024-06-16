@@ -46,8 +46,8 @@ export default function MyPlan() {
               search, edit, or view the details of your trips.
             </p>
           </div>
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
-            <h2 className="md:text-2xl text-sm font-bold whitespace-nowrap overflow-hidden text-ellipsis mb-2 md:mb-0">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mt-10">
+            <h2 className="md:text-2xl text-sm font-semibold whitespace-nowrap overflow-hidden text-primary mb-2 md:mb-0">
               My Plan
             </h2>
             <input
