@@ -1,8 +1,43 @@
-# React + Vite
+# MunCak! - A Hiking Planning Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Executive Summary
 
-Currently, two official plugins are available:
+### Problem Statement
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Mendaki gunung membutuhkan persiapan yang teliti, namun pendaki sering mengalami kesulitan dalam mencari teman mendaki, perencanaan yang kurang, perlengkapan yang tidak lengkap, dan kurangnya informasi tentang sesama pendaki. Kami membuat website 'MunCak!' untuk membantu pendaki mengatasi masalah ini.
+
+### Why We Chose This Project
+
+Kami melihat kebutuhan untuk platform yang membantu pendaki merencanakan pendakian dengan lebih baik. Proyek ini adalah kesempatan untuk menerapkan pengetahuan dan keterampilan kami dalam mengembangkan solusi yang berguna bagi para pendaki.
+
+## Installation
+
+Follow these steps to get started with the MunCak! project.
+
+### Prerequisites
+
+Ensure you have Node.js and npm installed on your system. You can download them from [here](https://nodejs.org/).
+
+### Step-by-Step Guide
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/username/MunCak.git
+   cd MunCak
+   ```
+
+2. **Install Dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the Development Server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Access the Website**
+   Open your browser and go to `http://localhost:5173` to see the website in action.
