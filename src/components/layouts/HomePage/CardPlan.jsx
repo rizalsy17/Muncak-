@@ -24,7 +24,6 @@ export default function CardPlan({
   onClick,
   onJoinRequest,
   onEditGearClick,
-  onEditParticipantsClick,
   onEditPlanClick,
   onDeletePlanClick,
   hasRequested,
@@ -33,17 +32,20 @@ export default function CardPlan({
   const { user } = useAuth();
   const currentUserUid = user ? user.uid : null;
   const [isJoinRequestModalOpen, setIsJoinRequestModalOpen] = useState(false);
-  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] = useState(false);
+  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] =
+    useState(false);
   const [isDetailOwnerModalOpen, setIsDetailOwnerModalOpen] = useState(false);
   const [isEditPlanModalOpen, setIsEditPlanModalOpen] = useState(false);
   const [isAlreadyJoined, setIsAlreadyJoined] = useState(false);
   const [hasAlreadyRequested, setHasAlreadyRequested] = useState(false);
-  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+    useState(false);
 
   const openJoinRequestModal = () => setIsJoinRequestModalOpen(true);
   const closeJoinRequestModal = () => setIsJoinRequestModalOpen(false);
   const openEditParticipantsModal = () => setIsEditParticipantsModalOpen(true);
-  const closeEditParticipantsModal = () => setIsEditParticipantsModalOpen(false);
+  const closeEditParticipantsModal = () =>
+    setIsEditParticipantsModalOpen(false);
   const openDetailOwnerModal = () => setIsDetailOwnerModalOpen(true);
   const closeDetailOwnerModal = () => setIsDetailOwnerModalOpen(false);
   const openEditPlanModal = () => setIsEditPlanModalOpen(true);

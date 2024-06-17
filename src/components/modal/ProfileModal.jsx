@@ -6,7 +6,6 @@ import { useAuth } from "../../contexts/authContext";
 export default function ProfileModal({ closeModal }) {
   const { user, userName, updateUserName } = useAuth();
   const [name, setName] = useState(userName);
-  const [email, setEmail] = useState(user?.email || "");
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -15,7 +14,6 @@ export default function ProfileModal({ closeModal }) {
         if (userDoc.exists()) {
           const userData = userDoc.data();
           setName(userData.name);
-          setEmail(userData.email);
         }
       }
     };
@@ -28,7 +26,6 @@ export default function ProfileModal({ closeModal }) {
       if (user) {
         await updateDoc(doc(db, "Users", user.uid), {
           name,
-          email,
         });
         updateUserName(name);
         closeModal();
@@ -53,7 +50,6 @@ export default function ProfileModal({ closeModal }) {
               ✕
             </button>
           </div>
-
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-darkText">
@@ -66,22 +62,7 @@ export default function ProfileModal({ closeModal }) {
                 className="mt-1 block w-full p-2 bg-white border border-lightText rounded-md focus:outline-none text-darkText focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
               />
             </div>
-
-            {/* Uncomment this section if you want to include email editing
-            <div>
-              <label className="block text-sm font-medium text-darkText">
-                Email
-              </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full p-2 bg-white border border-lightText rounded-md focus:outline-none text-darkText focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-              />
-            </div>
-            */}
           </div>
-
           <div className="flex justify-end space-x-2">
             <button
               onClick={handleSave}

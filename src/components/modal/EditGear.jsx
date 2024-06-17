@@ -1,21 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import useAddGear from "../../hooks/gear/useAddGear";
 import usePlanMembersWithNames from "../../hooks/gear/usePlanMembersWithNames";
-import SuccessGear from "./SuccessGear"; // Import modal SuccessGear
-import {
-  doc,
-  getDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import SuccessGear from "./SuccessGear";
 import { db } from "../../services/firebase/config";
 import useMembers from "../../hooks/member/useMember";
 
 export default function EditGear({ closeModal, planningId }) {
-  const { planMembersWithNames, loading, error } =
-    usePlanMembersWithNames(planningId);
+  const { loading, error } = usePlanMembersWithNames(planningId);
   const {
     gearName,
     setGearName,
@@ -24,7 +16,6 @@ export default function EditGear({ closeModal, planningId }) {
     budget,
     setBudget,
     selectedMember,
-    planMembers,
     setSelectedMember,
     handleAddGear,
     showSuccessModal,

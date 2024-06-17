@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { db } from "../../services/firebase/config";
 import {
   doc,
   getDoc,
@@ -10,6 +9,7 @@ import {
   getDocs,
   updateDoc,
 } from "firebase/firestore";
+import { db } from "../../services/firebase/config";
 
 const useAddMemberPlan = (planningId) => {
   const [selectedUser, setSelectedUser] = useState("");
@@ -44,7 +44,6 @@ const useAddMemberPlan = (planningId) => {
       const planningData = planningSnapshot.data();
       const maxParticipants = planningData.participants;
 
-      // Pengecekan jumlah peserta saat ini
       const currentParticipantsQuery = query(
         collection(db, "Members"),
         where("planningId", "==", planningId)
@@ -54,14 +53,12 @@ const useAddMemberPlan = (planningId) => {
       );
       const currentParticipantsCount = currentParticipantsSnapshot.size;
 
-      // Pengecekan apakah jumlah peserta sudah mencapai batas maksimum
       if (currentParticipantsCount >= maxParticipants) {
         setError("Member plan is full.");
         setLoading(false);
         return;
       }
 
-      // Pengecekan apakah pengguna sudah ada di plan
       const userInPlanQuery = query(
         collection(db, "Members"),
         where("userId", "==", selectedUser),
@@ -75,7 +72,6 @@ const useAddMemberPlan = (planningId) => {
         return;
       }
 
-      // Update status menjadi "joined" di collection RequestMember
       const requestMemberRef = collection(db, "RequestMember");
       const requestMemberQuery = query(
         requestMemberRef,
@@ -90,10 +86,9 @@ const useAddMemberPlan = (planningId) => {
         await updateDoc(requestMemberDoc.ref, { status: "joined" });
       }
 
-      // Tambahkan user sebagai member di collection Members
       await addDoc(collection(db, "Members"), {
         userId: selectedUser,
-        planningId: planningId,
+        planningId,
       });
 
       setLoading(false);
