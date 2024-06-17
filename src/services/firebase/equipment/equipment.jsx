@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import {
   collection,
   addDoc,

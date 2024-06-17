@@ -1,4 +1,3 @@
-/* eslint-disable radix */
 import React from "react";
 import createPlanning from "../../hooks/planning/createPlanning";
 

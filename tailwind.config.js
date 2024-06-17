@@ -12,7 +12,7 @@ export default {
         sans: ["Poppins", "sans-serif"],
       },
       spacing: {
-        18: "4.5rem", // Because Tailwind doesn't have 72px by default
+        18: "4.5rem",
       },
       borderWidth: {
         1: "1px",

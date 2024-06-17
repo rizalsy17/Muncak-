@@ -13,11 +13,10 @@ export default function DeleteConfirmation({
   const handleDelete = async () => {
     try {
       await deletePlanning(planningId);
-      onClose(); // Tutup modal terlebih dahulu
-      onDeleteSuccess(planningId); // Panggil fungsi callback dengan planningId
+      onClose();
+      onDeleteSuccess(planningId);
     } catch (error) {
       console.error("Error deleting plan:", error);
-      // Tambahkan penanganan error di sini (misalnya, menampilkan pesan error)
     }
   };
 

@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import NotFoundImage from "../assets/rafiki.svg"; // Pastikan path ke gambar sudah benar
+import NotFoundImage from "../assets/rafiki.svg";
 
 export default function NotFoundPage() {
   const navigate = useNavigate();
 
   const handleGoBack = () => {
-    navigate(-1); // Navigasi ke halaman sebelumnya
+    navigate(-1);
   };
 
   return (

@@ -46,7 +46,14 @@ const useMyPlan = () => {
     );
   };
 
-  return { plans, filteredPlans, searchTerm, handleSearch, userName, deletePlanById };
+  return {
+    plans,
+    filteredPlans,
+    searchTerm,
+    handleSearch,
+    userName,
+    deletePlanById,
+  };
 };
 
 export default useMyPlan;
