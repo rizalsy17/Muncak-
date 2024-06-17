@@ -3,14 +3,13 @@ import NavbarHome from "../../components/layouts/HomePage/NavbarHome";
 import CardPlan from "../../components/layouts/HomePage/CardPlan";
 import useMyPlan from "../../hooks/planning/useMyPlan";
 import EditParticipants from "../../components/modal/EditParticipants";
-import EditGear from "../../components/modal/EditGear"; // Impor modal EditGear
+import EditGear from "../../components/modal/EditGear"; // Import modal EditGear
 
 export default function MyPlan() {
-  const { filteredPlans, searchTerm, handleSearch, userName } = useMyPlan();
+  const { filteredPlans, searchTerm, handleSearch, userName, deletePlanById } = useMyPlan();
   const [selectedPlanningId, setSelectedPlanningId] = useState(null);
   const [isEditGearModalOpen, setIsEditGearModalOpen] = useState(false); 
-  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] =
-    useState(false);
+  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] = useState(false);
 
   const handleCardPlanClick = (planningId) => {
     setSelectedPlanningId(planningId);
@@ -30,6 +29,10 @@ export default function MyPlan() {
 
   const closeEditParticipantsModal = () => {
     setIsEditParticipantsModalOpen(false);
+  };
+
+  const handleDeletePlan = (planningId) => {
+    deletePlanById(planningId); // Call the hook method to update state
   };
 
   return (
@@ -66,23 +69,23 @@ export default function MyPlan() {
                 title={plan.tripName}
                 date={plan.startDate?.toDate().toLocaleDateString()}
                 imageUrl={plan.imageUrl}
-                planningId={plan.id} // Menyertakan ID sebagai properti
-                onClick={() => handleCardPlanClick(plan.id)} // Menetapkan onClick handler
-                onEditGearClick={openEditGearModal} // Menetapkan onClick handler untuk tombol "Edit Gear"
-                onEditParticipantsClick={openEditParticipantsModal} // Menetapkan onClick handler untuk tombol "Edit Participants"
+                planningId={plan.id}
+                onClick={() => handleCardPlanClick(plan.id)}
+                onEditGearClick={openEditGearModal}
+                onEditParticipantsClick={openEditParticipantsModal}
+                onDeletePlanClick={handleDeletePlan} // Add delete plan handler
               />
             </div>
           ))}
         </div>
       </div>
-      {selectedPlanningId &&
-        isEditParticipantsModalOpen && ( // Tampilkan modal EditParticipants jika selectedPlanningId ada dan isEditParticipantsModalOpen true
-          <EditParticipants
-            closeModal={closeEditParticipantsModal}
-            planningId={selectedPlanningId} // Teruskan selectedPlanningId ke modal
-          />
-        )}
-      {isEditGearModalOpen && ( // Tampilkan modal EditGear jika isEditGearModalOpen true
+      {selectedPlanningId && isEditParticipantsModalOpen && (
+        <EditParticipants
+          closeModal={closeEditParticipantsModal}
+          planningId={selectedPlanningId}
+        />
+      )}
+      {isEditGearModalOpen && (
         <EditGear
           closeModal={closeEditGearModal}
           planningId={selectedPlanningId}

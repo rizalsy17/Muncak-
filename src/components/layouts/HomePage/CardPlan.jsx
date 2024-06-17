@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 import JoinRequestModal from "../../modal/JoinRequest";
 import EditParticipantsModal from "../../modal/EditParticipants";
 import DetailOwner from "../../modal/DetailOwner";
-import EditPlanModal from "../../modal/EditPlanModal"; // Import EditPlanModal
+import EditPlanModal from "../../modal/EditPlanModal";
 import { useAuth } from "../../../contexts/authContext";
 import DeleteConfirmation from "../../modal/DeleteConfirmation";
 
@@ -33,20 +33,17 @@ export default function CardPlan({
   const { user } = useAuth();
   const currentUserUid = user ? user.uid : null;
   const [isJoinRequestModalOpen, setIsJoinRequestModalOpen] = useState(false);
-  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] =
-    useState(false);
+  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] = useState(false);
   const [isDetailOwnerModalOpen, setIsDetailOwnerModalOpen] = useState(false);
   const [isEditPlanModalOpen, setIsEditPlanModalOpen] = useState(false);
   const [isAlreadyJoined, setIsAlreadyJoined] = useState(false);
   const [hasAlreadyRequested, setHasAlreadyRequested] = useState(false);
-  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
-    useState(false);
+  const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] = useState(false);
 
   const openJoinRequestModal = () => setIsJoinRequestModalOpen(true);
   const closeJoinRequestModal = () => setIsJoinRequestModalOpen(false);
   const openEditParticipantsModal = () => setIsEditParticipantsModalOpen(true);
-  const closeEditParticipantsModal = () =>
-    setIsEditParticipantsModalOpen(false);
+  const closeEditParticipantsModal = () => setIsEditParticipantsModalOpen(false);
   const openDetailOwnerModal = () => setIsDetailOwnerModalOpen(true);
   const closeDetailOwnerModal = () => setIsDetailOwnerModalOpen(false);
   const openEditPlanModal = () => setIsEditPlanModalOpen(true);
@@ -73,6 +70,7 @@ export default function CardPlan({
   const handleEditPlanSave = (updatedPlan) => {
     onEditPlanClick(updatedPlan);
   };
+
   const handleDeleteConfirm = () => {
     onDeletePlanClick(planningId);
     closeDeleteConfirmation();
@@ -96,7 +94,7 @@ export default function CardPlan({
         src={imageUrl}
         alt={title}
         className="w-full h-32 object-cover rounded-t-lg"
-        onClick={openDetailOwnerModal} // Klik gambar untuk membuka modal DetailOwner
+        onClick={openDetailOwnerModal}
       />
       <div className="p-4">
         <div className="flex justify-between items-center">
@@ -177,7 +175,7 @@ export default function CardPlan({
       {isEditParticipantsModalOpen && (
         <EditParticipantsModal
           isOpen={isEditParticipantsModalOpen}
-          closeModal={closeEditParticipantsModal} // Pass closeModal as prop
+          closeModal={closeEditParticipantsModal}
           planningId={planningId}
         />
       )}

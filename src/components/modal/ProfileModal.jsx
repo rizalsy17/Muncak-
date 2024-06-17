@@ -4,7 +4,7 @@ import { db } from "../../services/firebase/config";
 import { useAuth } from "../../contexts/authContext";
 
 export default function ProfileModal({ closeModal }) {
-  const { user, userName } = useAuth();
+  const { user, userName, updateUserName } = useAuth();
   const [name, setName] = useState(userName);
   const [email, setEmail] = useState(user?.email || "");
 
@@ -30,6 +30,7 @@ export default function ProfileModal({ closeModal }) {
           name,
           email,
         });
+        updateUserName(name);
         closeModal();
       }
     } catch (error) {

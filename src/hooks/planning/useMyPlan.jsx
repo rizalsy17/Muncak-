@@ -39,7 +39,14 @@ const useMyPlan = () => {
     setFilteredPlans(filtered);
   };
 
-  return { plans, filteredPlans, searchTerm, handleSearch, userName };
+  const deletePlanById = (planningId) => {
+    setPlans((prevPlans) => prevPlans.filter((plan) => plan.id !== planningId));
+    setFilteredPlans((prevPlans) =>
+      prevPlans.filter((plan) => plan.id !== planningId)
+    );
+  };
+
+  return { plans, filteredPlans, searchTerm, handleSearch, userName, deletePlanById };
 };
 
 export default useMyPlan;

@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useState, useEffect } from "react";
 import {
   register as firebaseRegister,
@@ -28,6 +27,10 @@ export function AuthProvider({ children }) {
     });
     return () => unsubscribe();
   }, []);
+
+  const updateUserName = (name) => {
+    setUserName(name);
+  };
 
   const register = async (email, password, name) => {
     try {
@@ -72,7 +75,7 @@ export function AuthProvider({ children }) {
 
   return (
     <authContext.Provider
-      value={{ user, userName, register, login, logout, loading }}
+      value={{ user, userName, register, login, logout, loading, updateUserName }}
     >
       {children}
     </authContext.Provider>
