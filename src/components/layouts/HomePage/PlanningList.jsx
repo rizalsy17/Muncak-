@@ -126,7 +126,10 @@ export default function PlanningList({ userId, onJoinRequest }) {
       {filteredPlans.length > 0 ? (
         <div className="flex flex-wrap mx-2">
           {getCurrentPlans().map((plan) => (
-            <div className="px-2 w-full md:w-1/3 lg:w-1/3 mb-4" key={plan.id}>
+            <div
+              className="px-2 w-full sm:w-1/2 md:w-1/2 lg:w-1/3 mb-4"
+              key={plan.id}
+            >
               <CardPlan
                 title={plan.tripName}
                 date={plan.startDate.toDate().toLocaleDateString()}

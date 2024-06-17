@@ -6,10 +6,12 @@ import EditParticipants from "../../components/modal/EditParticipants";
 import EditGear from "../../components/modal/EditGear"; // Import modal EditGear
 
 export default function MyPlan() {
-  const { filteredPlans, searchTerm, handleSearch, userName, deletePlanById } = useMyPlan();
+  const { filteredPlans, searchTerm, handleSearch, userName, deletePlanById } =
+    useMyPlan();
   const [selectedPlanningId, setSelectedPlanningId] = useState(null);
-  const [isEditGearModalOpen, setIsEditGearModalOpen] = useState(false); 
-  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] = useState(false);
+  const [isEditGearModalOpen, setIsEditGearModalOpen] = useState(false);
+  const [isEditParticipantsModalOpen, setIsEditParticipantsModalOpen] =
+    useState(false);
 
   const handleCardPlanClick = (planningId) => {
     setSelectedPlanningId(planningId);
@@ -64,7 +66,10 @@ export default function MyPlan() {
         </div>
         <div className="flex flex-wrap -mx-2">
           {filteredPlans.map((plan) => (
-            <div className="px-2 w-full md:w-1/3 lg:w-1/3 mb-4" key={plan.id}>
+            <div
+              className="px-2 w-full sm:w-1/3 md:w-1/2 lg:w-1/3 xl:w-1/3 mb-4"
+              key={plan.id}
+            >
               <CardPlan
                 title={plan.tripName}
                 date={plan.startDate?.toDate().toLocaleDateString()}

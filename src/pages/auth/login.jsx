@@ -13,15 +13,15 @@ export default function Login() {
       <div className="container mx-auto px-4">
         <Navbar />
         <div className="flex flex-col md:flex-row justify-center">
-          <div className="hidden md:flex w-full md:w-2/6 md:mr-8 mx-auto">
+          <div className="hidden md:flex w-full md:w-2/6 md:mr-8 mx-auto md:justify-end">
             <img
-              className="w-full mt-52 md:mt-0"
+              className="w-full mt-52 md:mt-0 md:mr-10"
               src={mounImage}
               alt="Hero Image"
             />
           </div>
           <div className="w-full md:w-1/2">
-            <div className="mx-auto flex w-full max-w-sm flex-col gap-6">
+            <div className="mx-auto flex w-full max-w-sm flex-col gap-6 md:mt-20">
               <div className="flex flex-col text-left font-light text-darkText">
                 <h1 className="text-3xl font-medium">Login</h1>
                 <p className="text-sm text-left">
