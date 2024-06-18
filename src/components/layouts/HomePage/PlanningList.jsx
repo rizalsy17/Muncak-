@@ -5,8 +5,6 @@ import {
   addDoc,
   onSnapshot,
   where,
-  deleteDoc,
-  doc,
 } from "firebase/firestore";
 import { FaPlusCircle } from "react-icons/fa";
 import CardPlan from "./CardPlan";

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { db } from "../../services/firebase/config";
 import {
   collection,
   query,
@@ -8,6 +7,7 @@ import {
   doc,
   getDoc,
 } from "firebase/firestore";
+import { db } from "../../services/firebase/config";
 
 const usePlanMembersWithNames = (planningId) => {
   const [planMembersWithNames, setPlanMembersWithNames] = useState([]);

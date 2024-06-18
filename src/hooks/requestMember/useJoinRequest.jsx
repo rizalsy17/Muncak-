@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { db } from "../../services/firebase/config";
 import {
   doc,
   getDoc,
@@ -10,6 +9,7 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
+import { db } from "../../services/firebase/config";
 
 const useJoinRequest = (planningId, userId) => {
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ const useJoinRequest = (planningId, userId) => {
       }
     };
 
-    checkExistingRequest(); // Check existing request when component mounts
+    checkExistingRequest();
   }, [planningId, userId]);
 
   const sendJoinRequest = async () => {

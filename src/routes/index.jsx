@@ -5,7 +5,7 @@ import ProtectedRoute from "./protectedRoute";
 import Landing from "../pages/landing";
 import Login from "../pages/auth/login";
 import Register from "../pages/auth/register";
-import MyPlan from "../pages/user/MyPlan";
+import MyPlan from "../pages/MyPlan";
 import AddDummyData from "../test/addDummyData";
 import NotFoundPage from "../pages/NotFoundPage";
 import HomePage from "../pages/HomePage";

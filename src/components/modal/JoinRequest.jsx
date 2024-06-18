@@ -42,11 +42,7 @@ export default function JoinRequestModal({
         readOnly
       />
       <div className="modal">
-        <label
-          className="modal-overlay"
-          htmlFor="modal-3"
-          onClick={onClose}
-        ></label>
+        <label className="modal-overlay" htmlFor="modal-3" onClick={onClose} />
         <div className="modal-content flex flex-col gap-5 p-6 rounded-lg shadow-lg bg-white">
           <button
             onClick={onClose}

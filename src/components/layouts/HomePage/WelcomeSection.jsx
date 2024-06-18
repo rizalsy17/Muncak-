@@ -10,7 +10,7 @@ export default function WelcomeSection() {
   useEffect(() => {
     const getImage = async () => {
       try {
-        const response = await fetchRandomImage("indonesia mountain");
+        const response = await fetchRandomImage("indonesia mountain sunset");
         setImage(response.data[0]?.urls?.regular);
       } catch (error) {
         console.error("Error fetching image from Unsplash", error);

@@ -13,7 +13,7 @@ export const addMember = async (memberId, memberData) => {
     console.log("Member added successfully with ID: ", memberId);
   } catch (error) {
     console.error("Error adding member: ", error);
-    throw error; // throw the error for further handling
+    throw error;
   }
 };
 
@@ -24,7 +24,7 @@ export const addPlanning = async (planningId, planningData) => {
     console.log("Planning added successfully with ID: ", planningId);
   } catch (error) {
     console.error("Error adding planning: ", error);
-    throw error; // throw the error for further handling
+    throw error;
   }
 };
 
@@ -35,7 +35,7 @@ export const addEquipment = async (equipmentId, equipmentData) => {
     console.log("Equipment added successfully with ID: ", equipmentId);
   } catch (error) {
     console.error("Error adding equipment: ", error);
-    throw error; // throw the error for further handling
+    throw error;
   }
 };
 
@@ -45,10 +45,9 @@ export const getUser = async (userId) => {
     const userDoc = await getDoc(userRef);
     if (userDoc.exists()) {
       return userDoc.data();
-    } else {
-      console.log("No such document!");
-      return null;
     }
+    console.log("No such document!");
+    return null;
   } catch (error) {
     console.error("Error getting user:", error);
     throw error;
